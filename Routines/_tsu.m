@@ -31,24 +31,26 @@
  quit  ; end of call from top
  ;
  ;
+ ;-----------------------------------------------------------------------------
+ ; strip*: Unit tests for $$strip^%ts
  ;
-strip01 ; @TEST $$strip^%ts(%s,%c): Strip Single Character
+strip01 ; @TEST $$strip^%ts(%s): Strip Single Character
+ ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
+ ;
+ new %s set %s="In a hole in the ground, there lived a hobbit."
+ new result set result="Inaholeintheground,therelivedahobbit."
+ do CHKEQ^%ut($$strip^%ts(%s),result)
+ ;
+ quit  ; end of strip01
+ ;
+ ;
+strip02 ; @TEST $$strip^%ts(%s,%c): Strip Single Character
  ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
  ;
  new %s set %s="In a hole in the ground, there lived a hobbit."
  new %c set %c="h"
  new result set result="In a ole in te ground, tere lived a obbit."
  do CHKEQ^%ut($$strip^%ts(%s,%c),result)
- ;
- quit  ; end of strip01
- ;
- ;
-strip02 ; @TEST $$strip^%ts(%s): Strip Default Character (space)
- ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
- ;
- new %s set %s="In a hole in the ground, there lived a hobbit."
- new result set result="Inaholeintheground,therelivedahobbit."
- do CHKEQ^%ut($$strip^%ts(%s),result)
  ;
  quit  ; end of strip02
  ;
@@ -64,7 +66,17 @@ strip03 ; @TEST $$strip^%ts(%s,%c): Strip Multiple Characters
  quit  ; end of strip03
  ;
  ;
-strip04 ; @TEST $$strip^%ts(%s,%c): Strip non-existent characters
+strip04 ; @TEST $$strip^%ts(%s): Strip non-existent characters
+ ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
+ ;
+ new %s set %s="Inaholeintheground,therelivedahobbit."
+ new result set result=%s
+ do CHKEQ^%ut($$strip^%ts(%s),result)
+ ;
+ quit  ; end of strip04
+ ;
+ ;
+strip05 ; @TEST $$strip^%ts(%s,%c): Strip non-existent characters
  ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
  ;
  new %s set %s="In a hole in the ground, there lived a hobbit."
@@ -72,20 +84,10 @@ strip04 ; @TEST $$strip^%ts(%s,%c): Strip non-existent characters
  new result set result=%s
  do CHKEQ^%ut($$strip^%ts(%s,%c),result)
  ;
- quit  ; end of strip04
- ;
- ;
-strip05 ; @TEST $$strip^%ts(%s): Strip non-existent characters (default)
- ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
- ;
- new %s set %s="Inaholeintheground,therelivedahobbit."
- new result set result=%s
- do CHKEQ^%ut($$strip^%ts(%s),result)
- ;
  quit  ; end of strip05
  ;
  ;
-strip06 ; @TEST $$strip^%ts(%s): Strip from empty string (default)
+strip06 ; @TEST $$strip^%ts(%s): Strip from empty string
  ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
  ;
  new %s set %s=""
@@ -105,5 +107,8 @@ strip07 ; @TEST $$strip^%ts(%s,%c): Strip from empty string
  ;
  quit  ; end of strip07
  ;
+ ;
+ ;-----------------------------------------------------------------------------
+ ; trim*: Unit tests for $$trim^%ts
  ;
 eor ; end of routine %tsu
