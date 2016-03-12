@@ -189,12 +189,40 @@ trim07 ; @TEST $$trim^%ts(%s,"R"," "): Trim spaces from end
  ;
  quit  ; end of trim07
  ;
- ;----------------------------------------------------------------------------
- ; More tests:
- ; Bogus second argument? It looks like it should have no effect if it doesn't
- ; contain "L" or "R".
- ; Trim other character. What if the third argument is a string? Does it trim
- ; all such characters? If not, why not?
+ ;
+trim08 ; @TEST $$trim^%ts(%s,"ZQ"," "): No-op
+ ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
+ ;
+ new %s set %s="     May the hair on your toes never fall out!     "
+ new %e set %e="ZQ"
+ new %c set %c=" "
+ new result set result=%s
+ do CHKEQ^%ut($$trim^%ts(%s,%e,%c),result)
+ ;
+ quit  ; end of trim08
+ ;
+ ;
+trim09 ; @TEST $$trim^%ts(%s,"LR","*"): Something other than a space
+ ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
+ ;
+ new %s set %s="*****May the hair on your toes never fall out!*****"
+ new %e set %e="LR"
+ new %c set %c="*"
+ new result set result="May the hair on your toes never fall out!"
+ do CHKEQ^%ut($$trim^%ts(%s,%e,%c),result)
+ ;
+ quit  ; end of trim09
+ ;
+ ;
+trim10 ; @TEST $$trim^%ts(%s,," "): Missing second argument
+ ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
+ ;
+ new %s set %s="     May the hair on your toes never fall out!     "
+ new %c set %c=" "
+ new result set result="May the hair on your toes never fall out!"
+ do CHKEQ^%ut($$trim^%ts(%s,,%c),result)
+ ;
+ quit  ; end of trim10
  ;
  ;
 eor ; end of routine %tsu
