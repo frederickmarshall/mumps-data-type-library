@@ -1,124 +1,23 @@
-%ts ;ven/toad-Types: Strings ;2016-03-01 16:47
+%ts ;ven/toad-types: strings ;2016-03-11 19:48
  ;;1.5-development;MASH;;
  ;(c) 2016, Frederick D. S. Marshall, all rights reserved
  ;($) funded by Frederick D. S. Marshall
  ;(l) Licensed under Apache License 2.0. See LICENSE file.
- ; based on U.S. Department of Veterans Affairs's Kernel 8.
- ; under primary development
- ;
- ; primary developer: Frederick D. S. Marshall (toad) <toad@mumps.org>
- ; original author: R. Wally Fort (rwf)
- ; additional authors: Zach Gonzales (zag), Ed de Moel (edm)
- ;
- ; primary development
- ;
- ; 1987-11/1995-10 mdc/edm: create MDC's $%PRODUCE and $%REPLACE
- ; proposals based on separate initial proposals by Richard Walters
- ; (MDC) and Alfons Puig (MDCC-E); include sample code for implementing
- ; these functions.
- ;
- ; 1994-11-04 isf/rwf Kernel 8.0: create routine XLFSTR. $$UP, $$LOW,
- ; $$STRIP, $$REPEAT, $$INVERT, $$REPLACE, $$RJ, $$LJ, $$CJ, $$QUOTE.
- ;
- ; ca. 1995 isf/toad: create $$HTML^DILF to convert ^ and & in
- ; strings for use in HTML; create $$TRANSL8^DILF to implement
- ; $%REPLACE to support $$HTML.
- ;
- ; 1999-02-23 isf/rwf XU*8*112: add $$TRIM^XLFSTR(x[,"[L][R]"]) to trim
- ; spaces from left, right, or both of string.
- ;
- ; 1999-06-17 isf/rwf XU*8*120: add third param to $$TRIM to trim
- ; character other than space.
- ;
- ; 2002-03-13/14 sea/toad ARJT*8*2: create routine XLFSTR2. $$SEN,
- ; $$CAP, FIELDX.
- ;
- ; 2005-12-28 isf/rwf XU*8*400: XLFSTR: add $$SENTENCE & $$TITLE.
- ; based on design by sea/toad.
- ;
- ; 2006-12-19 isf/rwf XU*8*437: XLFSTR: add $$SPLIT. Fix bug in
- ; $$TRIM to trim spaces from " " properly.
- ;
- ; 2009-08-01/31 kbaz/zag: create routine JJOHCASE as part of Paideia
- ; training, including multiple string case-conversion and translation
- ; subroutines.
- ;
- ; 2012-04-24 kbaz/zag & ven/toad: create routine XVDSTR with FIELDX.
- ; add $$ESCAPE to convert strings for use with the unix enviroment to
- ; escape special characters.
- ;
- ; 2012-06-07 kbaz/zag & ven/toad: XVDSTR: add ";" to the list of
- ; characters to escape.
- ;
- ; 2012-06-08 kbaz/zag & ven/toad: XVDSTR: add "|" to the list of
- ; characters to escape.
- ;
- ; 2013-08-23 ven/toad: XLFSTR2: add $$VALID, change history, header,
- ; EOR.
- ;
- ; 2015-06-05 ven/toad: create routine %sm. pta.
- ;
- ; 2015-11-12/13 ven/toad: create routine %s with all functions from
- ; XLFSTR, XLFSTR2, XVDSTR, and %sm. lowercase labels. delete fieldx;
- ; keep pta. upgrade & refactor $$title; remove $$cap. refactor
- ; $$sentence; remove $$sen. refactor $$up, $$low, $$strip, $$repeat.
- ; rename $$up -> $$uc, $$low -> $$lc, wrap with $$upcase, $$lowcase,
- ; rename $$sentence -> $$sc, $$title -> $$cc, wrap with $$sencase,
- ; $$capcase. wrap pta with mergepta. convert $$split to procedure.
- ; rename split -> ptv, wrap with mergeptv.
- ;
- ; 2015-12-18/22 ven/toad: add missing string-merge tools to to-do list;
- ; finish building contents section; add to-do items from routine
- ; JJOHCASE; add it and produce & replace to history; delete $$quote
- ; and add it to the to-do list; rename $$escape -> $$unix; add $$HTML
- ; from routine DILF to to-do list; create $$alphabet & $$ALPHABET &
- ; use them; create $$ic & $$invcase from INVERT^JJOHCASE. Fix calls to
- ; $$lc & $$uc in $$sc & $$cc; comment %%uc, %%lc, $$ic, $$sc, $$cc;
- ; refactor $$rj, $$rjustify, $$lj, $$ljustify, $$cj, $$cjustify; create
- ; padtrunc, ctv, mergectv.
- ;
- ; 2016-01-31/02-09 ven/toad: copy routine %ts from %s. renamespace from
- ; %a* to %g*; add column-merge subroutines to to-do list; loosen
- ; namespaces of local variables, keep within %, focus on readability &
- ; brevity; refine comments; refactor & add defaults & max lengths to
- ; padtrunc, $$rj, $$lj, $$cj, $$repeat, $$strip; refactor $$trim;
- ; rewrite $$replace based on mdc/edm's $%replace^string proposal
- ; x11/1995-112, add isf/rwf's first few lines, split %spec into %find &
- ; %replace to support top-level parameters, define $$replace using
- ; examples in comments; temporarily fold in TRANSL8* subroutines for
- ; reference; create $$produce based on mdc/edm's $%produce^string
- ; proposal x11/1995-111, add rwf's first few lines from $$replace,
- ; split spec into %find & %replace, add support for top-level
- ; parameters; refactor $$unix -> $$stu; bring back & refactor rwf's
- ; $$QUOTE as $$stl; create $$sth from $$HTML^DILF, refactor, change
- ; encoded characters to the five standard ones - "&<>' - of modern
- ; html and xml; also create $$hts from $$HTML^DILF; create $$lts to
- ; convert a string literal back to a normal string (we've written this
- ; before in Fileman, though examples currently escape me); make $$stu
- ; only allow a single character (not a substring) to be used to escape;
- ; create $$uts to undo $$stu; refactor $$valid; add new to $$pta, more
- ; comments in pta, ptv, ctv; overhaul ptv and ctv; write $$atp;
- ; invert order of target and source in merge parameters to match marge
- ; command, rename from sourceTtarget to targetEsource, e.g., vec, edit
- ; call to $$ctv in $$cj to $$vec; overhaul aep; write $$pev; rename
- ; chunks to slices; write $$sev, $$mergesev, $$getslice, $$gs, add
- ; primitive operations (get, set, cut, put for extracts, pieces,
- ; slices, columns) to to-do list, add to to-do list negative positional
- ; params, distinguish slice length from string length in slices;
- ; $$uc -> $$u, $$lc -> $$l, $$ic -> $$i, $$sc -> $$s, $$cc -> $$c;
- ; write setslice, ss; add matslice & netslice to to-do list; write
- ; $$ms, $$matslice, cs, cutslice, ps, putslice;
- ; in $$s, $$l, $$i, $$s, $$c, padtrunc, $$rj, $$lj, $$cj, $$repeat,
- ; $$strip, $$trim, $$replace, $$TRANSL81, $$TRANSL8, $$TRNSL8S,
- ; $$produce, $$stu, $$uts, $$sth, $$hts, $$stl, $$lts, $$valid, $$gs,
- ; $$getslice, ss, setslice, ms, matslice, ps, putslice, aep, $$pea,
- ; $$mergepea, vep, $$pev, ves.
- ; 
  ;
  ;
- ; contents
+ ; %ts is the Mumps String Library, an element of the Mumps
+ ; Advanced Shell's Data types Library. It collects all public
+ ; application programmer interfaces in the Mumps String Library.
+ ; Its APIs are implemented in other %ts* routines, none of which
+ ; contains any public entry points.
  ;
- ; case-conversion functions
+ ;
+ ; primary development: see routine %tslog
+ ;
+ ;
+ ; contents (all PUBLIC application programmer interfaces)
+ ;
+ ; case-conversion functions (%tscase)
  ;
  ; $$alphabet = lowercase alphabet
  ; $$ALPHABET = uppercase alphabet
@@ -133,7 +32,7 @@
  ; $$c = convert string to capitalized case
  ; $$capcase = $$c
  ;
- ; string-justification functions
+ ; string-justification functions (%tsjust)
  ;
  ; padtrunc = calculate padding & truncation
  ; $$rj = right justify string
@@ -144,17 +43,17 @@
  ; $$cjustify = $$cj
  ; $$repeat = create string of repeating characters
  ;
- ; string-extraction functions
+ ; string-extraction functions (%ts????)
  ;
  ; $$strip = strip characters from string
  ; $$trim = trim character from end(s) of string
  ;
- ; string-translation functions
+ ; string-translation functions (%ts????)
  ;
  ; $$replace = find & replace substrings
  ; $$produce = repeatedly find & replace substrings
  ;
- ; string-conversion functions
+ ; string-conversion functions (%tsconv)
  ;
  ; $$stu = encode string as unix string
  ; $$uts = decode unix string to normal string
@@ -163,11 +62,11 @@
  ; $$stl = convert string to string literal
  ; $$lts = convert string literal to normal string
  ;
- ; string-validation functions
+ ; string-validation functions (%ts????)
  ;
  ; $$valid = string only contains printable, standard characters?
  ;
- ; string-parse functions
+ ; string-slice functions (%tslice)
  ;
  ; $$gs = get slice(s) of string
  ; $$getslice = $$gs
@@ -180,7 +79,7 @@
  ; ps: insert new slices into string
  ; putslice: ps
  ;
- ; string-merge tools
+ ; string-merge tools (%tsmerg)
  ;
  ; aep: merge array = pieces
  ; mergeaep: aep
@@ -950,7 +849,7 @@ valid(%s) ; string only contains printable, standard characters?
  ;
  ;
  ;
- ; string-parse tools
+ ; string-parse conventions
  ;
  ;
  ;
@@ -979,249 +878,58 @@ valid(%s) ; string only contains printable, standard characters?
  ; %sv = name of string variable
  ; %sa = name of string array
  ;
- ; $$get: copy values of slices from string
- ;   set: change values of slices in string (or create new ones)
- ;   mat: change values of slices to spaces
- ;   cut: remove slices from string
- ;   put: insert new slices into string
- ;   net: remove slices from string and assign to variable
- ; $$cnt: count slices (string length in slices)
+ ; $$get: copy values from string
+ ;   set: change values in string (or create new ones)
+ ;   mat: change values to spaces
+ ;   cut: remove values from string
+ ;   put: insert new values into string
+ ;   net: remove values from string and assign to variable
+ ; $$cnt: count values (string length in values)
  ;
  ;
-getslice(%s,%ssl,%ssf,%sst) quit $$gs(%s,%ssl,%ssf,%sst)
+ ;
+ ; string-slice tools
+ ;
+ ;
+ ;
+getslice(%s,%ssl,%ssf,%sst) ; $$gs
+ quit $$gs^%tslice(%s,%ssl,%ssf,%sst)
  ;
 gs(%s,%ssl,%ssf,%sst) ; get slice(s) of string
- ;ven/toad;PUBLIC;procedure;clean;silent;sac
- ; calls: none
- ; input:
- ;   %s = source string
- ;   %ssl = slice length, defaults to 80
- ;   %ssf = string slice from-position, defaults to 1
- ;   %sst = string slice to-position, defaults to %ssf
- ; output = string composed of those slices
- ; examples:
- ;      if long = a very long string
- ;   $$gs(long) = first 80 characters of long
- ;   $$gs("Old-world Principles",3) = "Old"
- ;   $$gs("Old-world Principles",3,2) = "-wo"
- ;   $$gs(long,,2) = second 80 characters of long
- ;   $$gs("Old-world Principles",3,3,4) = "rld Pr"
- ;
- new %empty set %empty=1 ; default to boundary condition
- do  ; init parameters and check boundaries
- . quit:$g(%s)=""  ; can't get slices from empty string
- . ;
- . set %ssl=$get(%ssl,80)\1 ; init slice length
- . quit:%ssl<1  ; slice length is a counting #
- . ;
- . set %ssf=$get(%ssf,1)\1 ; init from-slice
- . quit:%ssf<1   ; from-slice is a counting #
- . ;
- . set %sst=$get(%sst,%ssf)\1 ; init to-slice
- . quit:%sst<1  ; to-slice is a counting #
- . ;
- . set %empty=0 ; passed boundary conditions
- . quit
- if %empty quit "" ; return the empty string for boundary conditions
- ;
- new %ss set %ss=$extract(%s,%ssf-1*%ssl+1,%sst*%ssl)
- ;
- quit %ss ; end of $$gs, return slices
+ quit $$gs^%tslice(%s,%ssl,%ssf,%sst)
  ;
  ;
-setslice(%s,%ss,%ssl,%ssf,%sst) do ss(%s,%ss,%ssl,%ssf,%sst) quit
+setslice(%s,%ss,%ssl,%ssf,%sst) ; ss
+ do ss^%tslice(%s,%ss,%ssl,%ssf,%sst) quit
  ;
 ss(%s,%ss,%ssl,%ssf,%sst) ; set slice(s) of string
- ;ven/toad;PUBLIC;procedure;clean;silent;sac
- ; calls: none
- ; input:
- ;  .%s = source string
- ;   %ss = new slice(s) to set into string
- ;   %ssl = slice length, defaults to 80
- ;   %ssf = string slice from-position, defaults to 1
- ;   %sst = string slice to-position, defaults to %ssf
- ; output: .%s with replaced slices
- ; examples:
- ;      if long = a very long string
- ;      & if short="Old-world Principles"
- ;   do ss(.long,$$repeat("-"))
- ;      replaces 1st 80 chars of long with hyphens
- ;   do ss(.long,$$repeat("-"),,2)
- ;      replaces 2nd 80 chars of long with hyphens
- ;   do ss(.short,"New",3)
- ;      short = "New-world Principles"
- ;   do ss(.short,"ess",3,6)
- ;      short = "Old-world Princesses"
- ;   do ss(.short,"school",3,2,3)
- ;      short = "Old-school Principles"
- ;   do ss(.short,"",3,2,3)
- ;      short = "Old Principles"
- ;
- new %empty set %empty=1 ; default to boundary condition
- do  ; init parameters and check boundaries
- . set %ss=$get(%ss) ; init slices
- . ;
- . set %ssl=$get(%ssl,80)\1 ; init slice length
- . quit:%ssl<1  ; slice length is a counting #
- . ;
- . set %ssf=$get(%ssf,1)\1 ; init from-slice
- . quit:%ssf<1   ; from-slice is a counting #
- . ;
- . set %sst=$get(%sst,%ssf)\1 ; init to-slice
- . quit:%sst<1  ; to-slice is a counting #
- . ;
- . set %empty=0 ; passed boundary conditions
- . quit
- if %empty quit "" ; return the empty string for boundary conditions
- ;
- set $extract(%s,%ssf-1*%ssl+1,%sst*%ssl)=%ss ; set slices
- ;
- quit  ; end of ss
+ do ss^%tslice(%s,%ss,%ssl,%ssf,%sst) quit
  ;
  ;
-matslice(%s,%ssl,%ssf,%sst) do ms(%s,%ssl,%ssf,%sst) quit
+matslice(%s,%ssl,%ssf,%sst) ; ms
+ do ms^%tslice(%s,%ssl,%ssf,%sst) quit
  ;
 ms(%s,%ssl,%ssf,%sst) ; mat out slice(s) in string
- ;ven/toad;PUBLIC;procedure;clean;silent;sac
- ; calls: none
- ; input:
- ;  .%s = source string
- ;   %ssl = slice length, defaults to 80
- ;   %ssf = string slice from-position, defaults to 1
- ;   %sst = string slice to-position, defaults to %ssf
- ; output = string with matted-out slices
- ; examples:
- ;      if long = a very long string
- ;      & if short="Old-world Principles"
- ;   do ms(.long)
- ;      replaces 1st 80 chars of long with spaces
- ;   do ms(.long,,2)
- ;      replaces 2nd 80 chars of long with spaces
- ;   do ms(.short,3)
- ;      short = "   -world Principles"
- ;   do ms(.short,3,6)
- ;      short = "Old-world Princ   es"
- ;   do ms(.short,3,2,3)
- ;      short = "Old       Principles"
- ;
- new %empty set %empty=1 ; default to boundary condition
- do  ; init parameters and check boundaries
- . set %ssl=$get(%ssl,80)\1 ; init slice length
- . quit:%ssl<1  ; slice length is a counting #
- . ;
- . set %ssf=$get(%ssf,1)\1 ; init from-slice
- . quit:%ssf<1   ; from-slice is a counting #
- . ;
- . set %sst=$get(%sst,%ssf)\1 ; init to-slice
- . quit:%sst<1  ; to-slice is a counting #
- . ;
- . set %empty=0 ; passed boundary conditions
- . quit
- if %empty quit "" ; return the empty string for boundary conditions
- ;
- new %msl set %msl=%sst-%ssf+1*%ssl ; multi-slice length
- new %ss set %ss=$$repeat(" ",%msl) ; create mat-slices
- set $extract(%s,%ssf-1*%ssl+1,%sst*%ssl)=%ss ; mat-out slices
- ;
- quit  ; end of ms
+ do ms^%tslice(%s,%ssl,%ssf,%sst) quit
  ;
  ;
-cutslice(%s,%ssl,%ssf,%sst) do cs(%s,%ssl,%ssf,%sst) quit
+cutslice(%s,%ssl,%ssf,%sst) ; cs
+ do cs^%tslice(%s,%ssl,%ssf,%sst) quit
  ;
 cs(%s,%ssl,%ssf,%sst) ; cut slice(s) from string
- ;ven/toad;PUBLIC;procedure;clean;silent;sac
- ; calls: none
- ; input:
- ;  .%s = source string
- ;   %ssl = slice length, defaults to 80
- ;   %ssf = string slice from-position, defaults to 1
- ;   %sst = string slice to-position, defaults to %ssf
- ; output = string without those slices
- ; examples:
- ;      if long = a very long string
- ;      & if short="Old-world Principles"
- ;   do cs(.long)
- ;      removes 1st 80 chars of long
- ;   do cs(.long,,2)
- ;      removes 2nd 80 chars of long
- ;   do cs(.short,3)
- ;      short = "-world Principles"
- ;   do cs(.short,3,6)
- ;      short = "Old-world Princes"
- ;   do cs(.short,3,2,3)
- ;      short = "Old Principles"
- ;
- new %empty set %empty=1 ; default to boundary condition
- do  ; init parameters and check boundaries
- . set %ssl=$get(%ssl,80)\1 ; init slice length
- . quit:%ssl<1  ; slice length is a counting #
- . ;
- . set %ssf=$get(%ssf,1)\1 ; init from-slice
- . quit:%ssf<1   ; from-slice is a counting #
- . ;
- . set %sst=$get(%sst,%ssf)\1 ; init to-slice
- . quit:%sst<1  ; to-slice is a counting #
- . ;
- . set %empty=0 ; passed boundary conditions
- . quit
- if %empty quit "" ; return the empty string for boundary conditions
- ;
- new %msl set %msl=%sst-%ssf+1*%ssl ; multi-slice length
- set $extract(%s,%ssf-1*%ssl+1,%sst*%ssl)="" ; cut slices
- ;
- quit  ; end of cs
+ do cs^%tslice(%s,%ssl,%ssf,%sst) quit
  ;
  ;
-putslice(%s,%ss,%ssl,%ssf,%sst) do ps(%s,%ss,%ssl,%ssf,%sst) quit
+putslice(%s,%ss,%ssl,%ssf,%sst) ; ps
+ do ps^%tslice(%s,%ss,%ssl,%ssf,%sst) quit
  ;
 ps(%s,%ss,%ssl,%ssf,%sst) ; put new slice(s) into string
- ;ven/toad;PUBLIC;procedure;clean;silent;sac
- ; calls: none
- ; input:
- ;  .%s = source string
- ;   %ss = new slice(s) to set into string
- ;   %ssl = slice length, defaults to 80
- ;   %ssf = string slice from-position, defaults to 1
- ;   %sst = string slice to-position, defaults to %ssf
- ; output = string with additional slices
- ; examples:
- ;      if long = a very long string
- ;      & if short="Old-world Principles"
- ;   do ps(.long,$$repeat("-"))
- ;      inserts 80 dashes 1st 80 chars of long
- ;   do ps(.long,,2)
- ;      removes 2nd 80 chars of long
- ;   do ps(.short,3)
- ;      short = "Old-world Principles"
- ;   do ps(.short,3,6)
- ;      short = "Old-world Principles"
- ;   do ps(.short,3,2,3)
- ;      short = "Old-world Principles"
- ;
- new %empty set %empty=1 ; default to boundary condition
- do  ; init parameters and check boundaries
- . set %ss=$get(%ss) ; init slices
- . ;
- . set %ssl=$get(%ssl,80)\1 ; init slice length
- . quit:%ssl<1  ; slice length is a counting #
- . ;
- . set %ssf=$get(%ssf,1)\1 ; init from-slice
- . quit:%ssf<1   ; from-slice is a counting #
- . ;
- . set %sst=$get(%sst,%ssf)\1 ; init to-slice
- . quit:%sst<1  ; to-slice is a counting #
- . ;
- . set %empty=0 ; passed boundary conditions
- . quit
- if %empty quit "" ; return the empty string for boundary conditions
- ;
- ; add line to fetch piece to be inserted before or after
- do ss(%s,%ss,%ssl,%ssf,%sst) ; change this to include that piece
- ;
- quit  ; end of ps
+ do ps^%tslice(%s,%ss,%ssl,%ssf,%sst) quit
  ;
  ;
  ;   net: remove slices from string and assign to variable
+ ;
+ ;
  ; $$cnt: count slices (string length in slices)
  ;
  ;
