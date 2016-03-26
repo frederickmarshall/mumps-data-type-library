@@ -13,7 +13,7 @@ Our current focus is on:
 
 3) Marshall: finishing the initial suite of subroutines, which includes a subset of those sketched out in routine %ts's to-do list,
 
-4) McGLothlen: creating a new math library in %tn, and
+4) McGlothlen: creating a new math library in %tn, and
 
 5) Marshall: creating a new date-time library in %th.
 
