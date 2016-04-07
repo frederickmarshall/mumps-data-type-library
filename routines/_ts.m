@@ -1,4 +1,4 @@
-%ts ;ven/toad-types: strings ;2016-03-11 19:48
+%ts ;ven/toad-types: strings ;2016-04-04 15:57
  ;;1.5-development;MASH;;
  ;(c) 2016, Frederick D. S. Marshall, all rights reserved
  ;($) funded by Frederick D. S. Marshall
@@ -783,8 +783,14 @@ stl(%s) ; convert string to literal
  ; add quotes to value for concatenation
  ;
  ; example:
- ; %s = set array("howdy")="Surya"
- ; $$stl^%ts = "set array(""howdy"")=""Surya"""
+ ;   $$stl^%ts("set") [3 characters long]
+ ;     = """set""" [5 characters long]
+ ;
+ ;   $$stl^%ts("array(""howdy"")")  [14 characters long]
+ ;     = """array(""""howdy"""")""" [18 characters long]
+ ;
+ ;   $$stl^%ts("set array(""howdy"")=""Surya""") [26 characters long]
+ ;     = """set array(""""howdy"""")=""""Surya""""""" [32 characters long]
  ;
  new %a set %a(%s)=0 ; convert string to subscript
  new %n set %n=$query(%a) ; convert subscripted name to name reference
@@ -792,7 +798,7 @@ stl(%s) ; convert string to literal
  new %literal set %literal=%n ; start building string literal
  new %l set %l=$length(%literal) ; length of name reference
  set $extract(%literal,%l)="" ; remove final )
- set $extract(%literal,1,3) ; remove initial %a(
+ set $extract(%literal,1,3)="" ; remove initial %a(
  ;
  quit %literal ; end of $$stl, return string literal
  ;

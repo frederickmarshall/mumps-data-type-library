@@ -1,4 +1,4 @@
-%tslice ;ven/toad-types: string slices ;2016-03-11 19:48
+%tslice ;ven/toad-types: string slices ;2016-04-05 13:53
  ;;1.5-development;MASH;;
  ;(c) 2016, Frederick D. S. Marshall, all rights reserved
  ;($) funded by Frederick D. S. Marshall
@@ -157,7 +157,8 @@ ms(%s,%ssl,%ssf,%sst) ; mat out slice(s) in string
  ; called by:
  ;   matslice^%ts
  ;   ms^%ts
- ; calls: none
+ ; calls:
+ ;   $$repeat^%ts = create mat slices
  ; input:
  ;  .%s = source string
  ;   %ssl = slice length, defaults to 80
@@ -194,7 +195,7 @@ ms(%s,%ssl,%ssf,%sst) ; mat out slice(s) in string
  if %empty quit "" ; return the empty string for boundary conditions
  ;
  new %msl set %msl=%sst-%ssf+1*%ssl ; multi-slice length
- new %ss set %ss=$$repeat(" ",%msl) ; create mat-slices
+ new %ss set %ss=$$repeat^%ts(" ",%msl) ; create mat-slices
  set $extract(%s,%ssf-1*%ssl+1,%sst*%ssl)=%ss ; mat-out slices
  ;
  quit  ; end of ms

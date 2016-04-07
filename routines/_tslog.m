@@ -1,4 +1,4 @@
-%tslog ;ven/toad-types: strings, development log ;2016-03-11 19:57
+%tslog ;ven/toad-types: strings, development log ;2016-04-05 15:58
  ;;1.5-development;MASH;;
  ;(c) 2016, Frederick D. S. Marshall, all rights reserved
  ;($) funded by Frederick D. S. Marshall
@@ -13,7 +13,8 @@
  ;
  ; primary developer: Frederick D. S. Marshall (toad) <toad@mumps.org>
  ; original author: R. Wally Fort (rwf)
- ; additional authors: Zach Gonzales (zag), Ed de Moel (edm)
+ ; additional authors: Zach Gonzales (zag), Ed de Moel (edm),
+ ; Ken McGlothlen (mcglk)
  ;
  ; 1987-11/1995-10 mdc/edm: create MDC's $%PRODUCE and $%REPLACE
  ; proposals based on separate initial proposals by Richard Walters
@@ -122,14 +123,18 @@
  ; string-slice subroutines to new routine %tslice. Move primary-
  ; development history to routine %tslog.
  ;
- ; 2016-03-11 ven/mcglk&toad: Ken McGlothlen of VEN created routine
- ; %tsu to hold unit tests for MASH's string-type library, starting
- ; with $$trim & $$strip.
+ ; 2016-03-11 ven/mcglk&toad: created routine %tsu to hold unit tests
+ ; for MASH's string-type library, starting with $$trim & $$strip.
+ ;
+ ; 2016-04-04/05 ven/toad: created routine %tscol to hold string-
+ ; column subroutines; fix bug with set $extract in $$stl; fix bug
+ ; with call to $$repeat^%ts in ms^%tslice; fix examples in $$stl^%ts.
  ;
  ;
  ; contents
  ;
  ; %ts: mumps string library apis
+ ; %tscol: mumps string-column tools
  ; %tslice: string-slice tools
  ; %tsu: unit tests
  ; %tslog: primary-development log
