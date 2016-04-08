@@ -37,6 +37,7 @@ setprec(%prec,%plimit) ; set precision to %prec, which must be at most %plimit
  ;
  new %deflimit set %deflimit=12
  set %e=$get(%e)
+ quit:%e'="" %plimit
  ; Handling %plimit
  set %plimit=$get(%plimit,%deflimit)
  if %plimit="" set %plimit=%deflimit
@@ -54,7 +55,7 @@ setprec(%prec,%plimit) ; set precision to %prec, which must be at most %plimit
  . quit
  set:%e'="" %e=%e_", returned default ("_%deflimit_")"
  quit:%e'="" %deflimit
- if %plimit=%plimit\1 do
+ if %plimit'=(%plimit\1) do
  . set %e="%tn-w-setprec-nonintlimit"
  . set %e=%e_";Non-integer precision limit ("""_%plimit_"""), truncated"
  . set %plimit=%plimit\1
@@ -72,7 +73,7 @@ setprec(%prec,%plimit) ; set precision to %prec, which must be at most %plimit
  . quit
  set:%e'="" %e=%e_", returned default precision ("_%plimit_")"
  quit:%e'="" %plimit
- if %prec=%prec\1 do
+ if %prec'=(%prec\1) do
  . set %e="%tn-w-setprec-nonintprec"
  . set %e=%e_";Non-integer precision ("""_%prec_"""), truncated"
  . set %prec=%prec\1
