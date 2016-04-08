@@ -26,12 +26,15 @@
  ; label names and variable names that were longer than one character. It also
  ; had some (rare) problems; one constant was wrong, for example.
  ;
- ; 2016-04-02/mcglk: Started writing unit tests in conjunction with refactoring
- ; Wally's initial code.
+ ; 2016-04-08/mcglk: Unit tests for $$setprec are in, and a couple of bugs
+ ; fixed.
  ;
  ; 2016-04-04/mcglk: I have the Taylor series in $$ln working, and it's doing
  ; anywhere from 100x to 10000x better in precision. Performance is about on
  ; par.
+ ;
+ ; 2016-04-02/mcglk: Started writing unit tests in conjunction with refactoring
+ ; Wally's initial code.
  ;
  ; Contents:
  ;

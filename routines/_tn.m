@@ -21,19 +21,10 @@
  ; Utility routines; not generally called from outside.
  ;-----------------------------------------------------------------------------
  ;
-setprec(%prec,%plimit) ; set precision to %prec, which must be at most %plimit
+prec(%prec,%plimit) ; get precision to %prec, which must be at most %plimit
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  ;
- ; If no %prec has been supplied, or it's the empty string, or it exceeds
- ; %plimit, return %plimit; otherwise, return %prec.
- ;
- ; Note that if either %plimit or %prec are negative or non-numeric (except for
- ; an empty string, which indicates the default value), %deflimit is returned,
- ; and an error is indicated. If a non-integer value is supplied for either
- ; argument, it is truncated and a warning is indicated.
- ;
- ; %plimit defaults to 12 for the 1995 Mumps standard. Most of these functions
- ; will allow you to specify a precision.
+ ; See %tndoc for usage documentation.
  ;
  new %deflimit set %deflimit=12
  set %e=$get(%e)
@@ -42,21 +33,21 @@ setprec(%prec,%plimit) ; set precision to %prec, which must be at most %plimit
  set %plimit=$get(%plimit,%deflimit)
  if %plimit="" set %plimit=%deflimit
  if %plimit<0 do
- . set %e="%tn-e-setprec-neglimit"
+ . set %e="%tn-e-prec-neglimit"
  . set %e=%e_";Can't set a negative precision limit ("_%plimit_")"
  . quit
  else  if %plimit'=+%plimit do
- . set %e="%tn-e-setprec-nonsenselimit"
+ . set %e="%tn-e-prec-nonsenselimit"
  . set %e=%e_";Non-numeric precision limit ("""_%plimit_""")"
  . quit
  else  if %plimit>%deflimit do
- . set %e="%tn-e-setprec-limittoohigh"
+ . set %e="%tn-e-prec-limittoohigh"
  . set %e=%e_";Precision limit ("_%plimit_") cannot exceed "_%deflimit
  . quit
  set:%e'="" %e=%e_", returned default ("_%deflimit_")"
  quit:%e'="" %deflimit
  if %plimit'=(%plimit\1) do
- . set %e="%tn-w-setprec-nonintlimit"
+ . set %e="%tn-w-prec-nonintlimit"
  . set %e=%e_";Non-integer precision limit ("""_%plimit_"""), truncated"
  . set %plimit=%plimit\1
  . quit
@@ -64,17 +55,17 @@ setprec(%prec,%plimit) ; set precision to %prec, which must be at most %plimit
  set %prec=$get(%prec,%plimit)
  if %prec="" set %prec=%plimit
  if %prec<0 do
- . set %e="%tn-e-setprec-negprec"
+ . set %e="%tn-e-prec-negprec"
  . set %e=%e_";Can't set a negative precision ("_%prec_")"
  . quit
  else  if %prec'=+%prec do
- . set %e="%tn-e-setprec-nonsenseprec"
+ . set %e="%tn-e-prec-nonsenseprec"
  . set %e=%e_";Non-numeric precision ("""_%prec_""")"
  . quit
  set:%e'="" %e=%e_", returned default precision ("_%plimit_")"
  quit:%e'="" %plimit
  if %prec'=(%prec\1) do
- . set %e="%tn-w-setprec-nonintprec"
+ . set %e="%tn-w-prec-nonintprec"
  . set %e=%e_";Non-integer precision ("""_%prec_"""), truncated"
  . set %prec=%prec\1
  . quit
@@ -82,7 +73,7 @@ setprec(%prec,%plimit) ; set precision to %prec, which must be at most %plimit
  quit $select(%prec>%plimit:%plimit,1:%prec)
  ;
  ;
-fmtprec(%x,%prec) ; format to precision
+fmtprec(%x,%prec) ; format %x to precsion %prec
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  ;
  ; Returns whatever is in %x to %prec digits of precision.
@@ -91,7 +82,7 @@ fmtprec(%x,%prec) ; format to precision
  ; of the integer part of result (or zero if the integer part is longer than
  ; the precision).
  ;
- set %prec=$$setprec($get(%prec))
+ set %prec=$$prec($get(%prec))
  new %decimals set %decimals=%prec-$length(%x\1)
  quit +$justify(%x,0,$select(%decimals'<0:%decimals,1:0))
  ;
@@ -115,7 +106,7 @@ pi(%prec) ; Constant: pi
  ; Constant from the Mathematica equation: N[pi,36]
  ; https://www.wolframalpha.com/input/?i=N%5Bpi,36%5D
  ; 
- set %prec=$$setprec($get(%prec))
+ set %prec=$$prec($get(%prec))
  new %result set %result=3.14159265358979323846264338327950288
  quit $$fmtprec(%result,%prec)
  ;
@@ -130,7 +121,7 @@ lnten(%prec) ; Constant: ln 10
  ; https://www.wolframalpha.com/input/?i=N%5Bln(10),36%5D
  ; 
  new %result set %result=2.30258509299404568401799145468436421
- set %prec=$$setprec($get(%prec),12)
+ set %prec=$$prec($get(%prec),12)
  quit $$fmtprec(%result,%prec)
  ;
  ;
@@ -140,7 +131,7 @@ rlnten(%prec) ; Constant: 1/(ln 10)
  ; https://www.wolframalpha.com/input/?i=N%5B1%2Fln(10),36%5D
  ; 
  new %result set %result=.434294481903251827651128918916605082
- set %prec=$$setprec($get(%prec),12)
+ set %prec=$$prec($get(%prec),12)
  quit $$fmtprec(%result,%prec)
  ;
  ;
@@ -150,21 +141,21 @@ rlnten(%prec) ; Constant: 1/(ln 10)
  ;
 abs(%x,%prec) ; absolute value
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
- set %prec=$$setprec($get(%prec),12)
+ set %prec=$$prec($get(%prec),12)
  set %x=$select(%x<0:-%x,1:%x)
  quit $$fmtprec(%x,%prec)
  ;
  ;
 min(%a,%b,%prec) ; Minimum of two values
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
- set %prec=$$setprec($get(%prec),12)
+ set %prec=$$prec($get(%prec),12)
  set %a=$select(%a<%b:%a,1:%b)
  quit $$fmtprec(%a,%prec)
  ;
  ;
 max(%a,%b,%prec) ; Maximum of two values
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
- set %prec=$$setprec($get(%prec),12)
+ set %prec=$$prec($get(%prec),12)
  set %a=$select(%a<%b:%b,1:%a)
  quit $$fmtprec(%a,%prec)
  ;
@@ -200,7 +191,7 @@ max(%a,%b,%prec) ; Maximum of two values
  ;  ; At the end of this process, x will be the normalized value, p will be the
  ;  ; power of ten reflected in m, the multiplicand.
  ;  ; First, set the precision and the limiting value.
- ;  set %prec=$$setprec($get(%prec),12)
+ ;  set %prec=$$prec($get(%prec),12)
  ;  new lim do lim
  ;  ; step tells us which direction to push the power of ten:
  ;  new step set step=$select(x<1:-1,1:1)
