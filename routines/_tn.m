@@ -24,7 +24,7 @@
 prec(%prec,%plimit) ; get precision to %prec, which must be at most %plimit
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  set %prec=$get(%prec)
- set %plimit=%get(%plimit)
+ set %plimit=$get(%plimit)
  quit $$prec^%tnutil(%prec,%plimit)
  ;
 fmtprec(%x,%prec) ; format %x to precsion %prec
