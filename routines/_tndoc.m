@@ -63,7 +63,7 @@
  ; e(%prec)
  ; pi(%prec)
  ;
- ;   Constants: e and pi to some precision.
+ ;   Constants: e and pi to some precision; argument optional.
  ;   sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  ;
  ;
@@ -71,6 +71,13 @@
  ; rlnten(%prec)
  ;
  ;   Constants: ln 10 and 1/(ln 10). Mostly internal use, but available.
+ ;   Argument optional.
+ ;   sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
+ ;
+ ;
+ ; abs(%x,%prec)
+ ;
+ ;   Returns the absolute value of %s to some %precision. %prec is optional.
  ;   sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  ;
  ;
