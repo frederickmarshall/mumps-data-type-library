@@ -60,5 +60,19 @@
  ;   of significant digits).
  ;
  ;
+ ; e(%prec)
+ ; pi(%prec)
+ ;
+ ;   Constants: e and pi to some precision.
+ ;   sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
+ ;
+ ;
+ ; lnten(%prec)
+ ; rlnten(%prec)
+ ;
+ ;   Constants: ln 10 and 1/(ln 10). Mostly internal use, but available.
+ ;   sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
+ ;
+ ;
 eor
 

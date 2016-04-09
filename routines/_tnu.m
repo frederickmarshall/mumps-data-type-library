@@ -27,26 +27,31 @@ prec1 ; @TEST $$prec: Setting precision
  do testfunc(fnc,"",default,,"")
  do testfunc(fnc,"",default,"",)
  do testfunc(fnc,"",default,"","")
- do testfunc(fnc,"",8,,8)
- do testfunc(fnc,"",8,8,10)
- ; do testfunc(fnc,20,,default,"")
- ; do testfunc(fnc,20,10,10,"")
- ; do testfunc(fnc,8.1416,,8,"%tn-w-setprec-nonintprec")
- ; do testfunc(fnc,8.1416,10,8,"%tn-w-setprec-nonintprec")
- ; do testfunc(fnc,20.1416,,default,"%tn-w-setprec-nonintprec")
- ; do testfunc(fnc,8,20,default,"%tn-e-setprec-limittoohigh")
- ; do testfunc(fnc,8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
- ; do testfunc(fnc,8,-20,default,"%tn-e-setprec-neglimit")
- ; do testfunc(fnc,8.1416,-20.1416,default,"%tn-e-setprec-neglimit")
- ; do testfunc(fnc,-8,,default,"%tn-e-setprec-negprec")
- ; do testfunc(fnc,-8,20,default,"%tn-e-setprec-limittoohigh")
- ; do testfunc(fnc,-8.1416,,default,"%tn-e-setprec-negprec")
- ; do testfunc(fnc,-8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
- ; do testfunc(fnc,20,-8,default,"%tn-e-setprec-neglimit")
- ; do testfunc(fnc,20.1416,-8.1416,default,"%tn-e-setprec-neglimit")
- ; do testfunc(fnc,-20.1416,,default,"%tn-e-setprec-negprec")
- ; do testfunc(fnc,-20.1416,8.1416,8,"%tn-e-setprec-negprec")
-;
+ do testfunc(fnc,"",3,3)
+ do testfunc(fnc,"",3,,3)
+ do testfunc(fnc,"",3,4,3)
+ do testfunc(fnc,"",3,3,4)
+ do testfunc(fnc,"%tn-e-prec-neglimit",default,,-3)
+ do testfunc(fnc,"%tn-e-prec-neglimit",default,4,-3)
+ do testfunc(fnc,"%tn-e-prec-neglimit",default,4.1631,-3)
+ do testfunc(fnc,"%tn-e-prec-neglimit",default,,-3.1416)
+ do testfunc(fnc,"%tn-e-prec-neglimit",default,4,-3.1416)
+ do testfunc(fnc,"%tn-e-prec-neglimit",default,4.1631,-3.1416)
+ do testfunc(fnc,"%tn-e-prec-negprec",default,-3)
+ do testfunc(fnc,"%tn-e-prec-negprec",3,-4,3)
+ do testfunc(fnc,"%tn-e-prec-negprec",default,-3.1416)
+ do testfunc(fnc,"%tn-e-prec-negprec",3,-4.1631,3)
+ do testfunc(fnc,"%tn-w-prec-nonintlimit",3,,3.14159)
+ do testfunc(fnc,"%tn-w-prec-nonintlimit",3,4,3.14159)
+ do testfunc(fnc,"%tn-w-prec-nonintlimit",3,4.1631,3.14159)
+ do testfunc(fnc,"%tn-w-prec-nonintprec",3,3.14159)
+ do testfunc(fnc,"",default,99)
+ do testfunc(fnc,"%tn-e-prec-limittoohigh",default,,99)
+ do testfunc(fnc,"%tn-e-prec-limittoohigh",default,3,99)
+ do testfunc(fnc,"%tn-e-prec-limittoohigh",default,3.1416,99)
+ do testfunc(fnc,"%tn-e-prec-limittoohigh",default,3,99.99)
+ do testfunc(fnc,"%tn-e-prec-limittoohigh",default,3.1416,99.99)
+ ;
  quit  ; end of setprec1
  ;
  ;
@@ -64,29 +69,141 @@ fmtprec1 ; @TEST $$fmtprec: Formatting numbers to a precision.
  do testfunc(fnc,"","0",,"")
  do testfunc(fnc,"","0","",)
  do testfunc(fnc,"","0","","")
+ do testfunc(fnc,"","3",tt,0)
+ do testfunc(fnc,"","3",tt,1)
  do testfunc(fnc,"","3.14",tt,3)
- do testfunc(fnc,"","3.14",tt,3)
- do testfunc(fnc,"","3.1416",tt,4)
- do testfunc(fnc,"","3.14159",tt,5)
- ; do fmtprect(20,,default,"")
- ; do fmtprect(20,10,10,"")
- ; do fmtprect(8.1416,,8,"%tn-w-setprec-nonintprec")
- ; do fmtprect(8.1416,10,8,"%tn-w-setprec-nonintprec")
- ; do fmtprect(20.1416,,default,"%tn-w-setprec-nonintprec")
- ; do fmtprect(8,20,default,"%tn-e-setprec-limittoohigh")
- ; do fmtprect(8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
- ; do fmtprect(8,-20,default,"%tn-e-setprec-neglimit")
- ; do fmtprect(8.1416,-20.1416,default,"%tn-e-setprec-neglimit")
- ; do fmtprect(-8,,default,"%tn-e-setprec-negprec")
- ; do fmtprect(-8,20,default,"%tn-e-setprec-limittoohigh")
- ; do fmtprect(-8.1416,,default,"%tn-e-setprec-negprec")
- ; do fmtprect(-8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
- ; do fmtprect(20,-8,default,"%tn-e-setprec-neglimit")
- ; do fmtprect(20.1416,-8.1416,default,"%tn-e-setprec-neglimit")
- ; do fmtprect(-20.1416,,default,"%tn-e-setprec-negprec")
- ; do fmtprect(-20.1416,8.1416,8,"%tn-e-setprec-negprec")
+ do testfunc(fnc,"","3.142",tt,4)
+ do testfunc(fnc,"","3.1416",tt,5)
+ do testfunc(fnc,"","3.14159",tt,6)
+ do testfunc(fnc,"%tn-w-prec-nonintprec","3.1416",tt,5.3)
+ do testfunc(fnc,"%tn-e-prec-negprec",3.14159265359,tt,-5.3)
+ do testfunc(fnc,"",3.14159265359,tt,20)
+ do testfunc(fnc,"%tn-w-prec-nonintprec",3.14159265359,tt,20.384)
+ do testfunc(fnc,"%tn-e-prec-negprec",3.14159265359,tt,-20)
+ do testfunc(fnc,"%tn-e-prec-negprec",3.14159265359,tt,-20.384)
+ set tt=-3.14159265358979
+ do testfunc(fnc,"","-3",tt,0)
+ do testfunc(fnc,"","-3",tt,1)
+ do testfunc(fnc,"","-3.14",tt,3)
+ do testfunc(fnc,"","-3.142",tt,4)
+ do testfunc(fnc,"","-3.1416",tt,5)
+ do testfunc(fnc,"","-3.14159",tt,6)
+ do testfunc(fnc,"%tn-w-prec-nonintprec","-3.1416",tt,5.3)
+ do testfunc(fnc,"%tn-e-prec-negprec","-3.14159265359",tt,-5.3)
+ do testfunc(fnc,"","-3.14159265359",tt,20)
+ do testfunc(fnc,"%tn-w-prec-nonintprec","-3.14159265359",tt,20.384)
+ do testfunc(fnc,"%tn-e-prec-negprec","-3.14159265359",tt,-20)
+ do testfunc(fnc,"%tn-e-prec-negprec","-3.14159265359",tt,-20.384)
  ;
  quit  ; end of setprec1
+ ;
+ ; Note: From here on out, the conditions that show up in the exhaustive tests
+ ;  above won't be repeated; only what we need.
+ ;
+e1 ; @TEST $$e: The constant e
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$e^%tn"
+ ;
+ do testfunc(fnc,"","2.71828182846")
+ do testfunc(fnc,"","2.72",3)
+ ;
+ quit
+ ;
+ ;
+pi1 ; @TEST $$pi: The constant pi
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$pi^%tn"
+ ;
+ do testfunc(fnc,"","3.14159265359")
+ do testfunc(fnc,"","3.14",3)
+ ;
+ quit
+ ;
+ ;
+lnten1 ; @TEST $$lnten: The constant ln 10
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$lnten^%tn"
+ ;
+ do testfunc(fnc,"","2.30258509299")
+ do testfunc(fnc,"","2.3",3)
+ ;
+ quit
+ ;
+ ;
+rlnten1 ; @TEST $$rlnten: The constant 1/(ln 10)
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$rlnten^%tn"
+ ;
+ do testfunc(fnc,"",".434294481903")
+ do testfunc(fnc,"",".43429",5)
+ ;
+ quit
+ ;
+ ;
+abs ; @TEST $$abs: Absolute value function
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$abs^%tn"
+ ;
+ do testfunc(fnc,"%tn-e-abs-noarg","0")
+ do testfunc(fnc,"%tn-e-abs-badarg","0","q")
+ do testfunc(fnc,"%tn-e-abs-badarg","0","1q")
+ do testfunc(fnc,"","0",0)
+ do testfunc(fnc,"","1",1)
+ do testfunc(fnc,"","1",-1)
+ do testfunc(fnc,"","3.1416",3.1416)
+ do testfunc(fnc,"","3.1416",-3.1416)
+ ;
+ quit
+ ;
+ ;
+min ; @TEST $$min: Minimum of two values
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$min^%tn"
+ ;
+ do testfunc(fnc,"%tn-e-min-noargs","0")
+ do testfunc(fnc,"%tn-e-min-noargs","0",)
+ do testfunc(fnc,"%tn-e-min-noargs","0",,)
+ do testfunc(fnc,"%tn-e-min-noarg1","0",,-1)
+ do testfunc(fnc,"%tn-e-min-noarg2","0",-1,)
+ do testfunc(fnc,"%tn-e-min-badarg1","0","qq",-1)
+ do testfunc(fnc,"%tn-e-min-badarg2","0",-1,"qq")
+ do testfunc(fnc,"","-1",-1,1)
+ do testfunc(fnc,"","-3.14159",-3.14159,3.14159)
+ do testfunc(fnc,"","-3.142",-3.14159,3.14159,4)
+ ;
+ quit
+ ;
+ ;
+max ; @TEST $$max: Maximum of two values
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$max^%tn"
+ ;
+ do testfunc(fnc,"%tn-e-max-noargs","0")
+ do testfunc(fnc,"%tn-e-max-noargs","0",)
+ do testfunc(fnc,"%tn-e-max-noargs","0",,)
+ do testfunc(fnc,"%tn-e-max-noarg1","0",,-1)
+ do testfunc(fnc,"%tn-e-max-noarg2","0",-1,)
+ do testfunc(fnc,"%tn-e-max-badarg1","0","qq",-1)
+ do testfunc(fnc,"%tn-e-max-badarg2","0",-1,"qq")
+ do testfunc(fnc,"","1",-1,1)
+ do testfunc(fnc,"","3.14159",-3.14159,3.14159)
+ do testfunc(fnc,"","3.142",-3.14159,3.14159,4)
+ ;
+ quit
  ;
  ;
 testfunc(%fnc,%err,%expect,%a1,%a2,%a3,%a4,%a5,%a6) ; test n-argument function
@@ -105,90 +222,38 @@ testfunc(%fnc,%err,%expect,%a1,%a2,%a3,%a4,%a5,%a6) ; test n-argument function
  new tt
  ; compile function call string
  set callstr=%fnc
- write !
+ ; process %a1 through %an (where n = maxargs), adding onto args
  for ii=1:1:maxargs do
  . new argstr  set argstr="%a"_ii
  . new tt      set tt=argstr_"=$get("_argstr_",noarg)"
  . set @tt
- . write argstr," = ",@argstr,!
- . if (@argstr)'=noarg  set args=args_","""_(@argstr)_""""
- . else                 set args=args_","
- . write "args = ",args,!
- ; . new arg  set tt="arg=%a"_ii  set @tt
- ; . set tt="%a"_ii
- ; . write tt," -> """
- ; . write @tt
- ; . write """",!
- ; . if @("%a"_ii_"=""*!eek!*""") do
- ; . . set args=args_","
- ; . else  do
- ; . . set @("args=args_"_","
- ; . if eargs=0
+ . if ii'=1 set args=args_","
+ . if (@argstr)'=noarg  set args=args_""""_(@argstr)_""""
  . quit
- ; Trim trailing commas, and add parens if there's anything left.
- for jj=$length(args):-1:1 write "jj=",jj,",c=",$extract(args,jj),! quit:$extract(args,jj)'=","
- if $extract(args,1,jj)'="," set jj=jj+1 set args=$extract(args,1,jj)
+ ; Trim trailing commas from args, and add parens if there's anything left.
+ for jj=$length(args):-1:1 quit:$extract(args,jj)'=","
+ set args=$extract(args,1,jj)
+ if args=","  set args=""
  if args'=""  set args="("_args_")"
- write "args = ",args,!
- ; set callstr=%fnc
- ; if args=1 do
- ; . for ii=1:1:6 do
- ; . . 
- ; if %a="*noarg*"&(%b="*noarg*") do
- ; . quit
- ; else  if %b="*noarg*" do
- ; . set callstr=%fnc_"("""_%a_""")"
- ; . quit
- ; else  if %a="*noarg*" do
- ; . set callstr=%fnc_"(,"""_%b_""")"
- ; . quit
- ; else  do
- ; . set callstr=%fnc_"("""_%a_""","""_%b_""")"
- ; . quit
- ; set @("result="_callstr)
- ; set msg=callstr_" -> "_result_" (expected "_%expect_")"
- ; do CHKTF^HMPT(result=%expect,msg)
- ; set msg=callstr_" returned an unexpected error"
- ; set msg=msg_" ("""_%e_""", expected """_%err_""")"
- ; if %err="" do
- ; . do CHKTF^HMPT(%e=%err)
- ; . quit
- ; else  do
- ; . do CHKTF^HMPT(%e[%err,msg)
- ; . quit
- ; ;
+ ; set up the call
+ set callstr=%fnc_args
+ set @("result="_callstr)
+ set msg=callstr_" -> "_result_" (expected "_%expect_")"
+ do CHKTF^HMPT(result=%expect,msg)
+ set msg=callstr_" returned an unexpected error"
+ set msg=msg_" ("""_%e_""", expected """_%err_""")"
+ if %err="" do
+ . do CHKTF^HMPT(%e=%err,msg)
+ . quit
+ else  do
+ . do CHKTF^HMPT(%e[%err,msg)
+ . quit
+ set %e=""
+ ;
  quit  ; end of testfunc
  ;
  ;
  ;
- ; e1 ; @TEST $$e: The natural logarithm
- ;  ;ven/mcglk;test;procedure;clean;report;sac
- ;  ;
- ;  new expect set expect=2.718
- ;  new result set result=$$e^%tn
- ;  new msg set msg="Default result should be "_expect_", not "_result
- ;  do CHKTF^HMPT(result=expect,msg)
- ;  ;
- ;  new expect set expect=2.718
- ;  new result set result=$$e^%tn(6)
- ;  new msg set msg="Default result should be "_expect_", not "_result
- ;  do CHKTF^HMPT(result=expect,msg)
- ;  ;
- ;  new expect set expect=2.718
- ;  new result set result=$$e^%tn(0)
- ;  new msg set msg="Default result should be "_expect_", not "_result
- ;  do CHKTF^HMPT(result=expect,msg)
- ;  ;
- ;  new expect set expect=2.718
- ;  new result set result=$$e^%tn(-1)
- ;  new msg set msg="Default result should be "_expect_", not "_result
- ;  do CHKTF^HMPT(result=expect,msg)
- ;  ;
- ;  new expect set expect=2.718
- ;  new result set result=$$e^%tn(20)
- ;  new msg set msg="Default result should be "_expect_", not "_result
- ;  do CHKTF^HMPT(result=expect,msg)
- ;  ;
  quit
  ;
  ;

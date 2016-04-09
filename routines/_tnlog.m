@@ -26,8 +26,11 @@
  ; label names and variable names that were longer than one character. It also
  ; had some (rare) problems; one constant was wrong, for example.
  ;
- ; 2016-04-08/mcglk: Unit tests for $$setprec are in, and a couple of bugs
- ; fixed.
+ ; 2016-04-08/mcglk: Unit tests for $$prec are in, and a couple of bugs
+ ; fixed. Unit tests for $$fmtprec are also in. Since these two have been
+ ; unit-tested pretty exhaustively, I'm not going to bother testing the others
+ ; on conditions that would trigger the stuff that the unit tests on $$prec and
+ ; fmtprec have already brought up.
  ;
  ; 2016-04-04/mcglk: I have the Taylor series in $$ln working, and it's doing
  ; anywhere from 100x to 10000x better in precision. Performance is about on

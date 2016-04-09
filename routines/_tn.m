@@ -28,7 +28,7 @@ prec(%prec,%plimit) ; get precision to %prec, which must be at most %plimit
  ;
  new %deflimit set %deflimit=12
  set %e=$get(%e)
- quit:%e'="" %plimit
+ quit:%e'="" %deflimit
  ; Handling %plimit
  set %plimit=$get(%plimit,%deflimit)
  if %plimit="" set %plimit=%deflimit
@@ -80,7 +80,10 @@ fmtprec(%x,%prec) ; format %x to precsion %prec
  ;
  set %x=$get(%x,0)
  set %prec=$$prec($get(%prec))
- new %decimals set %decimals=%prec-$length(%x\1)
+ new %decimals
+ set %decimals=%prec-$length(%x\1)
+ if $extract(%x,1,1)="-" set %decimals=%decimals+1
+ if $extract(%x,1,1)="." set %decimals=%decimals+1
  quit +$justify(%x,0,$select(%decimals'<0:%decimals,1:0))
  ;
  ;
@@ -139,13 +142,52 @@ rlnten(%prec) ; Constant: 1/(ln 10)
 abs(%x,%prec) ; absolute value
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  set %prec=$$prec($get(%prec),12)
+ set %x=$get(%x)
+ if %x="" do
+ . set %e="%tn-e-abs-noarg;No argument was supplied"
+ . quit
+ else  if %x'=+%x do
+ . set %e="%tn-e-abs-badarg;Non-numeric argument ("""_%x_""") was supplied"
+ . quit
+ if %e'="" set %e=%e_", 0 returned"
+ quit:%e'="" 0
  set %x=$select(%x<0:-%x,1:%x)
  quit $$fmtprec(%x,%prec)
+ ;
+ ;
+minmaxar(%fnc,%a,%b) ; Set %e if something weird happened.
+ ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
+ set %prec=$$prec($get(%prec),12)
+ set %fnc=$get(%fnc)
+ set %a=$get(%a)
+ set %b=$get(%b)
+ if %a=""&(%b="") do
+ . set %e="%tn-e-"_%fnc_"-noargs;No arguments were supplied"
+ . quit
+ else  if %a="" do
+ . set %e="%tn-e-"_%fnc_"-noarg1;First argument was not supplied"
+ . quit
+ else  if %b="" do
+ . set %e="%tn-e-"_%fnc_"-noarg2;Second argument was not supplied"
+ . quit
+ else  if %a'=+%a do
+ . set %e="%tn-e-"_%fnc_"-badarg1;First argument """_%a_""") non-numeric"
+ . quit
+ else  if %b'=+%b do
+ . set %e="%tn-e-"_%fnc_"-badarg2;Second argument """_%b_""") non-numeric"
+ . quit
+ if %e'="" set %e=%e_", 0 returned"
+ quit
  ;
  ;
 min(%a,%b,%prec) ; Minimum of two values
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  set %prec=$$prec($get(%prec),12)
+ set %a=$get(%a)
+ set %b=$get(%b)
+ do minmaxar("min",%a,%b)
+ if %e'="" set %e=%e_", 0 returned"
+ quit:%e'="" 0
  set %a=$select(%a<%b:%a,1:%b)
  quit $$fmtprec(%a,%prec)
  ;
@@ -153,6 +195,11 @@ min(%a,%b,%prec) ; Minimum of two values
 max(%a,%b,%prec) ; Maximum of two values
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  set %prec=$$prec($get(%prec),12)
+ set %a=$get(%a)
+ set %b=$get(%b)
+ do minmaxar("max",%a,%b)
+ if %e'="" set %e=%e_", 0 returned"
+ quit:%e'="" 0
  set %a=$select(%a<%b:%b,1:%a)
  quit $$fmtprec(%a,%prec)
  ;
