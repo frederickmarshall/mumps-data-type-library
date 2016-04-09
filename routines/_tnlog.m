@@ -26,6 +26,9 @@
  ; label names and variable names that were longer than one character. It also
  ; had some (rare) problems; one constant was wrong, for example.
  ;
+ ; 2016-04-09/mcglk: Starting to move everything into seperate modules, and use
+ ; %tn for stub routines.
+ ;
  ; 2016-04-08/mcglk: Unit tests for $$prec are in, and a couple of bugs
  ; fixed. Unit tests for $$fmtprec are also in. Since these two have been
  ; unit-tested pretty exhaustively, I'm not going to bother testing the others

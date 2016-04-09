@@ -23,69 +23,11 @@
  ;
 prec(%prec,%plimit) ; get precision to %prec, which must be at most %plimit
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
- ;
- ; See %tndoc for usage documentation.
- ;
- new %deflimit set %deflimit=12
- set %e=$get(%e)
- quit:%e'="" %deflimit
- ; Handling %plimit
- set %plimit=$get(%plimit,%deflimit)
- if %plimit="" set %plimit=%deflimit
- if %plimit<0 do
- . set %e="%tn-e-prec-neglimit"
- . set %e=%e_";Can't set a negative precision limit ("_%plimit_")"
- . quit
- else  if %plimit'=+%plimit do
- . set %e="%tn-e-prec-nonsenselimit"
- . set %e=%e_";Non-numeric precision limit ("""_%plimit_""")"
- . quit
- else  if %plimit>%deflimit do
- . set %e="%tn-e-prec-limittoohigh"
- . set %e=%e_";Precision limit ("_%plimit_") cannot exceed "_%deflimit
- . quit
- set:%e'="" %e=%e_", returned default ("_%deflimit_")"
- quit:%e'="" %deflimit
- if %plimit'=(%plimit\1) do
- . set %e="%tn-w-prec-nonintlimit"
- . set %e=%e_";Non-integer precision limit ("""_%plimit_"""), truncated"
- . set %plimit=%plimit\1
- . quit
- ; Handling %prec
- set %prec=$get(%prec,%plimit)
- if %prec="" set %prec=%plimit
- if %prec<0 do
- . set %e="%tn-e-prec-negprec"
- . set %e=%e_";Can't set a negative precision ("_%prec_")"
- . quit
- else  if %prec'=+%prec do
- . set %e="%tn-e-prec-nonsenseprec"
- . set %e=%e_";Non-numeric precision ("""_%prec_""")"
- . quit
- set:%e'="" %e=%e_", returned default precision ("_%plimit_")"
- quit:%e'="" %plimit
- if %prec'=(%prec\1) do
- . set %e="%tn-w-prec-nonintprec"
- . set %e=%e_";Non-integer precision ("""_%prec_"""), truncated"
- . set %prec=%prec\1
- . quit
- ;
- quit $select(%prec>%plimit:%plimit,1:%prec)
- ;
+ quit $$prec^%tnutil(%prec,%plimit)
  ;
 fmtprec(%x,%prec) ; format %x to precsion %prec
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
- ;
- ; See %tndoc for usage documentation.
- ;
- set %x=$get(%x,0)
- set %prec=$$prec($get(%prec))
- new %decimals
- set %decimals=%prec-$length(%x\1)
- if $extract(%x,1,1)="-" set %decimals=%decimals+1
- if $extract(%x,1,1)="." set %decimals=%decimals+1
- quit +$justify(%x,0,$select(%decimals'<0:%decimals,1:0))
- ;
+ quit $$prec^%tnutil(%x,%prec)
  ;
  ;-----------------------------------------------------------------------------
  ; Constants
