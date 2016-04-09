@@ -76,12 +76,9 @@ prec(%prec,%plimit) ; get precision to %prec, which must be at most %plimit
 fmtprec(%x,%prec) ; format %x to precsion %prec
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  ;
- ; Returns whatever is in %x to %prec digits of precision.
+ ; See %tndoc for usage documentation.
  ;
- ; It calculates the number of decimal places as the precision minus the length
- ; of the integer part of result (or zero if the integer part is longer than
- ; the precision).
- ;
+ set %x=$get(%x,0)
  set %prec=$$prec($get(%prec))
  new %decimals set %decimals=%prec-$length(%x\1)
  quit +$justify(%x,0,$select(%decimals'<0:%decimals,1:0))
@@ -96,7 +93,7 @@ e(%prec) ; Constant: e
  ; Constant from the Mathematica equation: N[E,36]
  ; https://www.wolframalpha.com/input/?i=N%5BE,36%5D
  ;
- set %prec=$get(%prec)
+ set %prec=$$prec($get(%prec))
  new %result set %result=2.71828182845904523536028747135266250
  quit $$fmtprec(%result,%prec)
  ;

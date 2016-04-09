@@ -13,72 +13,151 @@
  do EN^HMPT($text(+0),2)
  quit
  ;
-setprec1 ; @TEST $$setprec: Setting precision
+prec1 ; @TEST $$prec: Setting precision
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
- new default set default=12
+ new %e
+ new fnc      set fnc="$$prec^%tn"
+ new default  set default=12
  ;
- do setprect(,,default,"")
- do setprect("","",default,"")
- do setprect(8,,8,"")
- do setprect(8,10,8,"")
- do setprect(20,,default,"")
- do setprect(20,10,10,"")
- do setprect(8.1416,,8,"%tn-w-setprec-nonintprec")
- do setprect(8.1416,10,8,"%tn-w-setprec-nonintprec")
- do setprect(20.1416,,default,"%tn-w-setprec-nonintprec")
- do setprect(8,20,default,"%tn-e-setprec-limittoohigh")
- do setprect(8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
- do setprect(8,-20,default,"%tn-e-setprec-neglimit")
- do setprect(8.1416,-20.1416,default,"%tn-e-setprec-neglimit")
- do setprect(-8,,default,"%tn-e-setprec-negprec")
- do setprect(-8,20,default,"%tn-e-setprec-limittoohigh")
- do setprect(-8.1416,,default,"%tn-e-setprec-negprec")
- do setprect(-8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
- do setprect(20,-8,default,"%tn-e-setprec-neglimit")
- do setprect(20.1416,-8.1416,default,"%tn-e-setprec-neglimit")
- do setprect(-20.1416,,default,"%tn-e-setprec-negprec")
- do setprect(-20.1416,8.1416,8,"%tn-e-setprec-negprec")
+ do testfunc(fnc,"",default)
+ do testfunc(fnc,"",default,)
+ do testfunc(fnc,"",default,,)
+ do testfunc(fnc,"",default,"")
+ do testfunc(fnc,"",default,,"")
+ do testfunc(fnc,"",default,"",)
+ do testfunc(fnc,"",default,"","")
+ do testfunc(fnc,"",8,,8)
+ do testfunc(fnc,"",8,8,10)
+ ; do testfunc(fnc,20,,default,"")
+ ; do testfunc(fnc,20,10,10,"")
+ ; do testfunc(fnc,8.1416,,8,"%tn-w-setprec-nonintprec")
+ ; do testfunc(fnc,8.1416,10,8,"%tn-w-setprec-nonintprec")
+ ; do testfunc(fnc,20.1416,,default,"%tn-w-setprec-nonintprec")
+ ; do testfunc(fnc,8,20,default,"%tn-e-setprec-limittoohigh")
+ ; do testfunc(fnc,8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
+ ; do testfunc(fnc,8,-20,default,"%tn-e-setprec-neglimit")
+ ; do testfunc(fnc,8.1416,-20.1416,default,"%tn-e-setprec-neglimit")
+ ; do testfunc(fnc,-8,,default,"%tn-e-setprec-negprec")
+ ; do testfunc(fnc,-8,20,default,"%tn-e-setprec-limittoohigh")
+ ; do testfunc(fnc,-8.1416,,default,"%tn-e-setprec-negprec")
+ ; do testfunc(fnc,-8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
+ ; do testfunc(fnc,20,-8,default,"%tn-e-setprec-neglimit")
+ ; do testfunc(fnc,20.1416,-8.1416,default,"%tn-e-setprec-neglimit")
+ ; do testfunc(fnc,-20.1416,,default,"%tn-e-setprec-negprec")
+ ; do testfunc(fnc,-20.1416,8.1416,8,"%tn-e-setprec-negprec")
+;
+ quit  ; end of setprec1
+ ;
+ ;
+fmtprec1 ; @TEST $$fmtprec: Formatting numbers to a precision.
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$fmtprec^%tn"
+ new tt  set tt=3.14159265358979
+ ;
+ do testfunc(fnc,"","0")
+ do testfunc(fnc,"","0",)
+ do testfunc(fnc,"","0",,)
+ do testfunc(fnc,"","0","")
+ do testfunc(fnc,"","0",,"")
+ do testfunc(fnc,"","0","",)
+ do testfunc(fnc,"","0","","")
+ do testfunc(fnc,"","3.14",tt,3)
+ do testfunc(fnc,"","3.14",tt,3)
+ do testfunc(fnc,"","3.1416",tt,4)
+ do testfunc(fnc,"","3.14159",tt,5)
+ ; do fmtprect(20,,default,"")
+ ; do fmtprect(20,10,10,"")
+ ; do fmtprect(8.1416,,8,"%tn-w-setprec-nonintprec")
+ ; do fmtprect(8.1416,10,8,"%tn-w-setprec-nonintprec")
+ ; do fmtprect(20.1416,,default,"%tn-w-setprec-nonintprec")
+ ; do fmtprect(8,20,default,"%tn-e-setprec-limittoohigh")
+ ; do fmtprect(8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
+ ; do fmtprect(8,-20,default,"%tn-e-setprec-neglimit")
+ ; do fmtprect(8.1416,-20.1416,default,"%tn-e-setprec-neglimit")
+ ; do fmtprect(-8,,default,"%tn-e-setprec-negprec")
+ ; do fmtprect(-8,20,default,"%tn-e-setprec-limittoohigh")
+ ; do fmtprect(-8.1416,,default,"%tn-e-setprec-negprec")
+ ; do fmtprect(-8.1416,20.1416,default,"%tn-e-setprec-limittoohigh")
+ ; do fmtprect(20,-8,default,"%tn-e-setprec-neglimit")
+ ; do fmtprect(20.1416,-8.1416,default,"%tn-e-setprec-neglimit")
+ ; do fmtprect(-20.1416,,default,"%tn-e-setprec-negprec")
+ ; do fmtprect(-20.1416,8.1416,8,"%tn-e-setprec-negprec")
  ;
  quit  ; end of setprec1
  ;
  ;
-setprect(%a,%b,%expect,%err) ; test a particular $$setprec^%tn call
- ;ven/mcglk;private;procedure;clean;silent;sac
- new msg
- new result
- new callstr
- new %e
- set %a=$get(%a,"*noarg*") ; special flag
- set %b=$get(%b,"*noarg*")
- if %a="*noarg*"&(%b="*noarg*") do
- . set result=$$setprec^%tn
- . set callstr="$$setprec"
- . quit
- else  if %b="*noarg*" do
- . set result=$$setprec^%tn(%a)
- . set callstr="$$setprec("_%a_")"
- . quit
- else  if %a="*noarg*" do
- . set result=$$setprec^%tn(,%b)
- . set callstr="$$setprec(,"_%b_")"
- . quit
- else  do
- . set result=$$setprec^%tn(%a,%b)
- . set callstr="$$setprec("_%a_","_%b_")"
- . quit
- set msg=callstr_" -> "_result_" (expected "_%expect_")"
- do CHKTF^HMPT(result=%expect,msg)
- set msg=callstr_" returned an unexpected error"
- set msg=msg_" ("""_%e_""", expected """_%err_""")"
- if %err="" do
- . do CHKTF^HMPT(%e=%err)
- . quit
- else  do
- . do CHKTF^HMPT(%e[%err,msg)
- . quit
- quit
+testfunc(%fnc,%err,%expect,%a1,%a2,%a3,%a4,%a5,%a6) ; test n-argument function
+ ;ven/mcglk;private;procedure;clean;report;sac
  ;
+ if $get(%fnc)="" quit
+ ;
+ new args     set args=""
+ new callstr
+ new ii,jj
+ new maxargs  set maxargs=6
+ new msg
+ new nargs    set nargs=0
+ new noarg    set noarg="*!eek!*"
+ new result
+ new tt
+ ; compile function call string
+ set callstr=%fnc
+ write !
+ for ii=1:1:maxargs do
+ . new argstr  set argstr="%a"_ii
+ . new tt      set tt=argstr_"=$get("_argstr_",noarg)"
+ . set @tt
+ . write argstr," = ",@argstr,!
+ . if (@argstr)'=noarg  set args=args_","""_(@argstr)_""""
+ . else                 set args=args_","
+ . write "args = ",args,!
+ ; . new arg  set tt="arg=%a"_ii  set @tt
+ ; . set tt="%a"_ii
+ ; . write tt," -> """
+ ; . write @tt
+ ; . write """",!
+ ; . if @("%a"_ii_"=""*!eek!*""") do
+ ; . . set args=args_","
+ ; . else  do
+ ; . . set @("args=args_"_","
+ ; . if eargs=0
+ . quit
+ ; Trim trailing commas, and add parens if there's anything left.
+ for jj=$length(args):-1:1 write "jj=",jj,",c=",$extract(args,jj),! quit:$extract(args,jj)'=","
+ if $extract(args,1,jj)'="," set jj=jj+1 set args=$extract(args,1,jj)
+ if args'=""  set args="("_args_")"
+ write "args = ",args,!
+ ; set callstr=%fnc
+ ; if args=1 do
+ ; . for ii=1:1:6 do
+ ; . . 
+ ; if %a="*noarg*"&(%b="*noarg*") do
+ ; . quit
+ ; else  if %b="*noarg*" do
+ ; . set callstr=%fnc_"("""_%a_""")"
+ ; . quit
+ ; else  if %a="*noarg*" do
+ ; . set callstr=%fnc_"(,"""_%b_""")"
+ ; . quit
+ ; else  do
+ ; . set callstr=%fnc_"("""_%a_""","""_%b_""")"
+ ; . quit
+ ; set @("result="_callstr)
+ ; set msg=callstr_" -> "_result_" (expected "_%expect_")"
+ ; do CHKTF^HMPT(result=%expect,msg)
+ ; set msg=callstr_" returned an unexpected error"
+ ; set msg=msg_" ("""_%e_""", expected """_%err_""")"
+ ; if %err="" do
+ ; . do CHKTF^HMPT(%e=%err)
+ ; . quit
+ ; else  do
+ ; . do CHKTF^HMPT(%e[%err,msg)
+ ; . quit
+ ; ;
+ quit  ; end of testfunc
  ;
  ;
  ;

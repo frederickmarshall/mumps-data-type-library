@@ -50,5 +50,15 @@
  ;   it settable via arguments (which XLFMTH also allowed).
  ;
  ;
+ ; fmtprec(%x,%prec)
+ ;
+ ;   "format %x to precsion %prec"
+ ;   sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
+ ;
+ ;   This is generally used only internally within %tn, but is still available
+ ;   for public use. It returns a value formatted to a given precision (number
+ ;   of significant digits).
+ ;
+ ;
 eor
 

@@ -225,4 +225,18 @@ trim10 ; @TEST $$trim^%ts(%s,," "): Missing second argument
  quit  ; end of trim10
  ;
  ;
+trim11 ; @TEST $$trim^%ts(%s,," "): Trim to nothing
+ ;ven/mcglk&toad;test;procedure;clean?;silent?;sac
+ ;
+ new %s set %s="                                    "
+ new %c set %c=" "
+ new result set result=""
+ do CHKEQ^%ut($$trim^%ts(%s,,%c),result)
+ do CHKEQ^%ut($$trim^%ts(%s,"L",%c),result)
+ do CHKEQ^%ut($$trim^%ts(%s,"R",%c),result)
+ do CHKEQ^%ut($$trim^%ts(%s,"LR",%c),result)
+ ;
+  quit  ; end of trim11
+ ;
+ ;
 eor ; end of routine %tsu
