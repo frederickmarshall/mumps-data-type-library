@@ -58,7 +58,7 @@ prec2 ; @TEST $$prec: Timing 10,000 calls
  ;ven/mcglk;test;procedure;clean;report;sac
  new i,x
  for i=1:1:10000 set x=$$prec^%tn(3,4)
- CHKTF^HMPT(1,"")
+ do CHKTF^HMPT(1,"")
  quit
  ;
  ;
