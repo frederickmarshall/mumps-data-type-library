@@ -31,7 +31,7 @@ fmtprec(%x,%prec) ; format %x to precsion %prec
  ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
  set %x=$get(%x)
  set %prec=$get(%prec)
- quit $$prec^%tnutil(%x,%prec)
+ quit $$fmtprec^%tnutil(%x,%prec)
  ;
  ;-----------------------------------------------------------------------------
  ; Constants

@@ -78,7 +78,7 @@ fmtprec(%x,%prec) ; format %x to precsion %prec
  ;
  ; See %tndoc for usage documentation.
  ;
- set %x=$get(%x,0)
+ set %x=$get(%x)
  if %x="" set %x=0
  write !,"x=",%x,!
  set %prec=$$prec($get(%prec))
