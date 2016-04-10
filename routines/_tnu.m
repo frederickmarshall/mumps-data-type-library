@@ -54,10 +54,10 @@ prec1 ; @TEST $$prec: Setting precision
  ;
  quit  ; end of prec1
  ;
-prec2 ; @TEST $$prec: Timing 10,000 calls
+prec2 ; @TEST $$prec: Timing 100,000 calls
  ;ven/mcglk;test;procedure;clean;report;sac
  new i,x
- for i=1:1:10000 set x=$$prec^%tn(3,4)
+ for i=1:1:100000 set x=$$prec^%tn(3,4)
  do CHKTF^HMPT(1,"")
  quit
  ;
