@@ -1,4 +1,4 @@
-%tnutil ;ven/toad&mcglk-types: numbers ;2016-04-02 23:37
+%tnflib ;ven/toad&mcglk-types: numbers: function library ;2016-04-02 23:37
  ;;1.5-development;MASH;;
  ;(c) 2016, Frederick D. S. Marshall, all rights reserved
  ;($) funded by Frederick D. S. Marshall
@@ -86,6 +86,19 @@ fmtprec(%x,%prec) ; format %x to precsion %prec
  if $extract(%x,1,1)="-" set %decimals=%decimals+1
  if $extract(%x,1,1)="." set %decimals=%decimals+1
  quit +$justify(%x,0,$select(%decimals'<0:%decimals,1:0))
+ ;
+ ;
+epsilon(%prec) ; create a suitable epsilon based on precision value
+ ;sf-isc/rwf,hines/cfb,dw,ven/mcglk;PUBLIC;function;clean;silent;sac
+ ; Originally called LIM. Sets epsilon to 1000x less than the precision.
+ ;
+ set %prec=$$prec($get(%prec))
+ set %deflimit=$$prec
+ new %epsilon
+ set %epsilon=%prec+3
+ set %epsilon=$select(%epsilon<%deflimit:%epsilon,1:%deflimit-1)
+ set @("%epsilon=1E-"_%epsilon)
+ quit %epsilon
  ;
  ;
 eor

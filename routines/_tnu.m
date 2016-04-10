@@ -206,6 +206,21 @@ max ; @TEST $$max: Maximum of two values
  quit
  ;
  ;
+ln ; @TEST $$max: Log of base e
+ ;ven/mcglk;test;procedure;clean;report;sac
+ ;
+ new %e
+ new fnc set fnc="$$ln^%tn"
+ ;
+ do testfunc(fnc,"%tn-e-ln-lognpos","")
+ do testfunc(fnc,"%tn-e-ln-lognpos","",)
+ do testfunc(fnc,"%tn-e-ln-lognpos","",,)
+ do testfunc(fnc,"%tn-e-ln-lognpos","",0)
+ do testfunc(fnc,"%tn-e-ln-lognpos","",0,-1)
+ ;
+ quit
+ ;
+ ;
 testfunc(%fnc,%err,%expect,%a1,%a2,%a3,%a4,%a5,%a6) ; test n-argument function
  ;ven/mcglk;private;procedure;clean;report;sac
  ;
