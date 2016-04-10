@@ -79,6 +79,7 @@ fmtprec(%x,%prec) ; format %x to precsion %prec
  ; See %tndoc for usage documentation.
  ;
  set %x=$get(%x,0)
+ if %x="" set %x=0
  set %prec=$$prec($get(%prec))
  new %decimals
  set %decimals=%prec-$length(%x\1)
