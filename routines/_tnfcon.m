@@ -25,9 +25,9 @@ e(%prec) ; Constant: e
  ; Constant from the Mathematica equation: N[E,36]
  ; https://www.wolframalpha.com/input/?i=N%5BE,36%5D
  ;
- set %prec=$$prec($get(%prec))
+ set %prec=$$prec^%tnflib($get(%prec))
  new %result set %result=2.71828182845904523536028747135266250
- quit $$fmtprec(%result,%prec)
+ quit $$fmtprec^%tnflib(%result,%prec)
  ;
  ;
 pi(%prec) ; Constant: pi
@@ -35,9 +35,9 @@ pi(%prec) ; Constant: pi
  ; Constant from the Mathematica equation: N[pi,36]
  ; https://www.wolframalpha.com/input/?i=N%5Bpi,36%5D
  ; 
- set %prec=$$prec($get(%prec))
+ set %prec=$$prec^%tnflib($get(%prec))
  new %result set %result=3.14159265358979323846264338327950288
- quit $$fmtprec(%result,%prec)
+ quit $$fmtprec^%tnflib(%result,%prec)
  ;
  ;
  ;-----------------------------------------------------------------------------
@@ -50,8 +50,8 @@ lnten(%prec) ; Constant: ln 10
  ; https://www.wolframalpha.com/input/?i=N%5Bln(10),36%5D
  ; 
  new %result set %result=2.30258509299404568401799145468436421
- set %prec=$$prec($get(%prec),12)
- quit $$fmtprec(%result,%prec)
+ set %prec=$$prec^%tnflib($get(%prec),12)
+ quit $$fmtprec^%tnflib(%result,%prec)
  ;
  ;
 rlnten(%prec) ; Constant: 1/(ln 10)
@@ -60,8 +60,8 @@ rlnten(%prec) ; Constant: 1/(ln 10)
  ; https://www.wolframalpha.com/input/?i=N%5B1%2Fln(10),36%5D
  ; 
  new %result set %result=.434294481903251827651128918916605082
- set %prec=$$prec($get(%prec),12)
- quit $$fmtprec(%result,%prec)
+ set %prec=$$prec^%tnflib($get(%prec),12)
+ quit $$fmtprec^%tnflib(%result,%prec)
  ;
  ;
 eor
