@@ -102,7 +102,16 @@ fmtprec1 ; @TEST $$fmtprec: Formatting numbers to a precision.
  do testfunc(fnc,"%tn-e-prec-negprec","-3.14159265359",tt,-20)
  do testfunc(fnc,"%tn-e-prec-negprec","-3.14159265359",tt,-20.384)
  ;
- quit  ; end of setprec1
+ quit  ; end of fmtprec1
+ ;
+fmtprec1 ; @TEST $$fmtprec: Timing 100,000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new pi=$$pi^%tnfcon
+ new i,x
+ for i=1:1:100000 set x=$$fmtprec^%tn(pi,6)
+ do CHKTF^HMPT(1,"")
+ quit
+ ;
  ;
  ; Note: From here on out, the conditions that show up in the exhaustive tests
  ;  above won't be repeated; only what we need.
