@@ -80,14 +80,11 @@ fmtprec(%x,%prec) ; format %x to precsion %prec
  ;
  set %x=$get(%x)
  if %x="" set %x=0
- write !,"x=",%x,!
  set %prec=$$prec($get(%prec))
- write "prec=",%prec,!
  new %decimals
  set %decimals=%prec-$length(%x\1)
  if $extract(%x,1,1)="-" set %decimals=%decimals+1
  if $extract(%x,1,1)="." set %decimals=%decimals+1
- write "dec=",%decimals,!
  quit +$justify(%x,0,$select(%decimals'<0:%decimals,1:0))
  ;
  ;
