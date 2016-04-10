@@ -55,7 +55,7 @@ prec1 ; @TEST $$prec: Setting precision
  quit  ; end of setprec1
  ;
  ;
-fmtprec1 ; %TEST $$fmtprec: Formatting numbers to a precision.
+fmtprec1 ; @TEST $$fmtprec: Formatting numbers to a precision.
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
