@@ -55,7 +55,7 @@ prec1 ; @TEST $$prec: Setting precision
  quit  ; end of setprec1
  ;
  ;
-fmtprec1 ; @TEST $$fmtprec: Formatting numbers to a precision.
+fmtprec1 ; %TEST $$fmtprec: Formatting numbers to a precision.
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
@@ -100,7 +100,7 @@ fmtprec1 ; @TEST $$fmtprec: Formatting numbers to a precision.
  ; Note: From here on out, the conditions that show up in the exhaustive tests
  ;  above won't be repeated; only what we need.
  ;
-e1 ; @TEST $$e: The constant e
+e1 ; %TEST $$e: The constant e
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
@@ -112,7 +112,7 @@ e1 ; @TEST $$e: The constant e
  quit
  ;
  ;
-pi1 ; @TEST $$pi: The constant pi
+pi1 ; %TEST $$pi: The constant pi
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
@@ -124,7 +124,7 @@ pi1 ; @TEST $$pi: The constant pi
  quit
  ;
  ;
-lnten1 ; @TEST $$lnten: The constant ln 10
+lnten1 ; %TEST $$lnten: The constant ln 10
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
@@ -136,7 +136,7 @@ lnten1 ; @TEST $$lnten: The constant ln 10
  quit
  ;
  ;
-rlnten1 ; @TEST $$rlnten: The constant 1/(ln 10)
+rlnten1 ; %TEST $$rlnten: The constant 1/(ln 10)
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
@@ -148,7 +148,7 @@ rlnten1 ; @TEST $$rlnten: The constant 1/(ln 10)
  quit
  ;
  ;
-abs ; @TEST $$abs: Absolute value function
+abs ; %TEST $$abs: Absolute value function
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
@@ -166,7 +166,7 @@ abs ; @TEST $$abs: Absolute value function
  quit
  ;
  ;
-min ; @TEST $$min: Minimum of two values
+min ; %TEST $$min: Minimum of two values
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
@@ -186,7 +186,7 @@ min ; @TEST $$min: Minimum of two values
  quit
  ;
  ;
-max ; @TEST $$max: Maximum of two values
+max ; %TEST $$max: Maximum of two values
  ;ven/mcglk;test;procedure;clean;report;sac
  ;
  new %e
