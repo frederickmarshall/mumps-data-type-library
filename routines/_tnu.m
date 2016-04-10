@@ -127,6 +127,13 @@ e1 ; @TEST $$e: The constant e
  ;
  quit
  ;
+e2 ; @TEST $$e: Timing 100,000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new i,x
+ for i=1:1:100000 set x=$$e^%tn
+ do CHKTF^HMPT(1,"")
+ quit
+ ;
  ;
 pi1 ; @TEST $$pi: The constant pi
  ;ven/mcglk;test;procedure;clean;report;sac
@@ -137,6 +144,13 @@ pi1 ; @TEST $$pi: The constant pi
  do testfunc(fnc,"","3.14159265359")
  do testfunc(fnc,"","3.14",3)
  ;
+ quit
+ ;
+pi2 ; @TEST $$pi: Timing 100,000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new i,x
+ for i=1:1:100000 set x=$$pi^%tn
+ do CHKTF^HMPT(1,"")
  quit
  ;
  ;
@@ -151,6 +165,13 @@ lnten1 ; @TEST $$lnten: The constant ln 10
  ;
  quit
  ;
+lnten2 ; @TEST $$lnten: Timing 100,000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new i,x
+ for i=1:1:100000 set x=$$lnten^%tn
+ do CHKTF^HMPT(1,"")
+ quit
+ ;
  ;
 rlnten1 ; @TEST $$rlnten: The constant 1/(ln 10)
  ;ven/mcglk;test;procedure;clean;report;sac
@@ -161,6 +182,13 @@ rlnten1 ; @TEST $$rlnten: The constant 1/(ln 10)
  do testfunc(fnc,"",".434294481903")
  do testfunc(fnc,"",".43429",5)
  ;
+ quit
+ ;
+rlnten2 ; @TEST $$rlnten: Timing 100,000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new i,x
+ for i=1:1:100000 set x=$$rlnten^%tn
+ do CHKTF^HMPT(1,"")
  quit
  ;
  ;
@@ -179,6 +207,13 @@ abs ; @TEST $$abs: Absolute value function
  do testfunc(fnc,"","3.1416",3.1416)
  do testfunc(fnc,"","3.1416",-3.1416)
  ;
+ quit
+ ;
+abs2 ; @TEST $$abs: Timing 100,000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new i,x
+ for i=1:1:100000 set x=$$abs^%tn(-3.14)
+ do CHKTF^HMPT(1,"")
  quit
  ;
  ;
@@ -201,6 +236,13 @@ min ; @TEST $$min: Minimum of two values
  ;
  quit
  ;
+min2 ; @TEST $$min: Timing 100,000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new i,x
+ for i=1:1:100000 set x=$$min^%tn(-3.14,4)
+ do CHKTF^HMPT(1,"")
+ quit
+ ;
  ;
 max ; @TEST $$max: Maximum of two values
  ;ven/mcglk;test;procedure;clean;report;sac
@@ -219,6 +261,13 @@ max ; @TEST $$max: Maximum of two values
  do testfunc(fnc,"","3.14159",-3.14159,3.14159)
  do testfunc(fnc,"","3.142",-3.14159,3.14159,4)
  ;
+ quit
+ ;
+max2 ; @TEST $$max: Timing 100,000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new i,x
+ for i=1:1:100000 set x=$$max^%tn(-3.14,4)
+ do CHKTF^HMPT(1,"")
  quit
  ;
  ;
