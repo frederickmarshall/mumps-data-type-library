@@ -104,7 +104,7 @@ fmtprec1 ; @TEST $$fmtprec: Formatting numbers to a precision.
  ;
  quit  ; end of fmtprec1
  ;
-fmtprec1 ; @TEST $$fmtprec: Timing 100,000 calls
+fmtprec2 ; @TEST $$fmtprec: Timing 100,000 calls
  ;ven/mcglk;test;procedure;clean;report;sac
  new pi=$$pi^%tnfcon
  new i,x
