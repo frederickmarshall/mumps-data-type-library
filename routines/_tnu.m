@@ -52,7 +52,16 @@ prec1 ; @TEST $$prec: Setting precision
  do testfunc(fnc,"%tn-e-prec-limittoohigh",default,3,99.99)
  do testfunc(fnc,"%tn-e-prec-limittoohigh",default,3.1416,99.99)
  ;
- quit  ; end of setprec1
+ quit  ; end of prec1
+ ;
+prec2 ; @TEST $$prec: Timing 1000 calls
+ ;ven/mcglk;test;procedure;clean;report;sac
+ new i,x
+ for i=1:1:10000 do
+ . set @("x="_fnc_"(3,4)")
+ . quit
+ CHKTF^HMPT(1,"")
+ quit
  ;
  ;
 fmtprec1 ; @TEST $$fmtprec: Formatting numbers to a precision.
@@ -266,10 +275,6 @@ testfunc(%fnc,%err,%expect,%a1,%a2,%a3,%a4,%a5,%a6) ; test n-argument function
  set %e=""
  ;
  quit  ; end of testfunc
- ;
- ;
- ;
- quit
  ;
  ;
 eor
