@@ -52,21 +52,21 @@ ln(%x,%prec) ; log base e
  ; zero, . . .
  new m  set m=1
  ; If the value is already in the range [1,10), we'll just skip the loop.
- new stop  set stop=x<10&(x'<1)
+ new stop  set stop=%x<10&(%x'<1)
  ; Now, as long as stop isn't true, step up (or down) by powers of ten.
  ; x shrinks (or grows), while m grows (or shrinks). Then we recalculate stop
  ; depending on whether we've gotten close enough to 1.
  for p=0:step do  quit:stop
  . set %x=%x*$select(step<0:10,1:.1)
  . set m=m*$select(step<0:.1,1:10)
- . set stop=$select(step<0:x>1,1:x<10)
+ . set stop=$select(step<0:%x>1,1:%x<10)
  . quit
  ; At this point, p is one off. Fix that.
  set p=p+step
  ; At this point, we have scientific notation: x should be in [1,10), and m
  ; should be 10^p, so x*m should match the original argument. But if x>5, we
  ; can get that closer to 1 by dropping a power.
- if x>5 do
+ if %x>5 do
  . set %x=%x*.1
  . set m=m*10
  . set p=p+1
