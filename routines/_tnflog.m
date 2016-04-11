@@ -96,7 +96,7 @@ ln(%x,%prec) ; log base e
  new yp   set yp=1
  new term
  ; Do terms two and up until we get to enough decimal places.
- write "taylor series start (epsilon=",epsilon,")",!
+ write "taylor series start (epsilon=",%epsilon,")",!
  for p=2:2 do  quit:term<%epsilon
  . set yp=yp*y*y ; yp=y^p
  . set term=yp/(p+1)
