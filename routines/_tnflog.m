@@ -57,7 +57,7 @@ ln(%x,%prec) ; log base e
  ; x shrinks (or grows), while m grows (or shrinks). Then we recalculate stop
  ; depending on whether we've gotten close enough to 1.
  for p=0:step do  quit:stop
- . set x=x*$select(step<0:10,1:.1)
+ . set %x=%x*$select(step<0:10,1:.1)
  . set m=m*$select(step<0:.1,1:10)
  . set stop=$select(step<0:x>1,1:x<10)
  . quit
@@ -67,9 +67,9 @@ ln(%x,%prec) ; log base e
  ; should be 10^p, so x*m should match the original argument. But if x>5, we
  ; can get that closer to 1 by dropping a power.
  if x>5 do
- . set p=p+1
- . set x=x*.1
+ . set %x=%x*.1
  . set m=m*10
+ . set p=p+1
  . quit
  ; At the end, we have to add those powers of ten back to the logarithm.
  ; We'll store that in logm.
@@ -83,7 +83,7 @@ ln(%x,%prec) ; log base e
  ;   s = sum n=1,3,5... of 1/n*yp, where yp = y^(n-1)
  ; (And this is an excellent example of why I want to finish up a literate
  ; programming method.)
- new y       set y=x-1/(x+1)
+ new y       set y=%x-1/(%x+1)
  new result  set result=2*y
  new power
  ; The first term of the sum is (1/1 * y^0) = 1
