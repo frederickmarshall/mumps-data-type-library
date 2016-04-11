@@ -282,8 +282,10 @@ ln ; @TEST $$max: Log of base e
  do testfunc(fnc,"%tn-e-ln-lognpos","",,)
  do testfunc(fnc,"%tn-e-ln-lognpos","",0)
  do testfunc(fnc,"%tn-e-ln-lognpos","",0,-1)
+ do testfunc(fnc,"%tn-e-ln-lognpos",0,1)
+ do testfunc(fnc,"%tn-e-ln-lognpos",0,2)
+ do testfunc(fnc,"%tn-e-ln-lognpos",0,$$e^%tnfcon)
  ;
- write !
  quit
  ;
  ;
