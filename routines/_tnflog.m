@@ -37,7 +37,7 @@ ln(%x,%prec) ; log base e
  . set %e="%tn-e-ln-lognpos"
  . set %e=%e_",Can't take a logarithm of a non-positive real number ("_%x_")"
  . quit
- quit:%e ""
+ quit:%e'="" ""
  write !,"got past arg errors %e=",%e,", %x=",%x,!
  ; First, this converges faster if the value is close to 1.
  ; So we'll normalize the number to scientific notation, keeping track of the
