@@ -47,7 +47,7 @@ ln(%x,%prec) ; log base e
  set %prec=$$prec^%tnflib($get(%prec))
  set %epsilon=$$epsilon^%tnflib(%prec)
  ; step tells us which direction to push the power of ten:
- new step  set step=$select(x<1:-1,1:1)
+ new step  set step=$select(%x<1:-1,1:1)
  ; m is the multiplicand, and since this is 10^p, and p always starts with
  ; zero, . . .
  new m  set m=1

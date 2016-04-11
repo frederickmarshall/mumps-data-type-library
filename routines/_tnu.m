@@ -283,6 +283,7 @@ ln ; @TEST $$max: Log of base e
  do testfunc(fnc,"%tn-e-ln-lognpos","",0)
  do testfunc(fnc,"%tn-e-ln-lognpos","",0,-1)
  ;
+ write !
  quit
  ;
  ;
