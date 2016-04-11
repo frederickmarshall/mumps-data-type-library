@@ -101,7 +101,7 @@ ln(%x,%prec) ; log base e
  . set yp=yp*y*y ; yp=y^p
  . set term=yp/(p+1)
  . set sum=term+sum
- . write "p=",p,", yp=",yp,", term=",term,", sum=",sum,", e=",epsilon,!
+ . write "p=",p,", yp=",yp,", term=",term,", sum=",sum,!
  . quit
  ; Add back those powers of ten and return the value.
  set result=result*sum+logm
