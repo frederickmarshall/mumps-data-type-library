@@ -63,6 +63,7 @@ ln(%x,%prec) ; log base e
  . set %x=%x*$select(step<0:10,1:.1)
  . set m=m*$select(step<0:.1,1:10)
  . set stop=$select(step<0:%x>1,1:%x<10)
+ . write "p=",p,", x=",%x,", m=",m,", stop=",stop,!
  . quit
  ; At this point, p is one off. Fix that.
  set p=p+step
