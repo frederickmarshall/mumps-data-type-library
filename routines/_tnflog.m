@@ -24,6 +24,7 @@ ln(%x,%prec) ; log base e
  ;
  ; If an error condition has already been set, preserve it and pass back
  ; an empty string.
+ set %e=$get(%e)
  quit:%e ""
  ; This calculates a natural logarithm using a modified Taylor series.
  ; if x = 0, ln(x) is negative infinity.
