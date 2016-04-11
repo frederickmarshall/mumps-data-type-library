@@ -37,6 +37,7 @@ ln(%x,%prec) ; log base e
  . set %e=%e_",Can't take a logarithm of a non-positive real number ("_%x_")"
  . quit
  quit:%e ""
+ write !,"got past arg errors",!
  ; First, this converges faster if the value is close to 1.
  ; So we'll normalize the number to scientific notation, keeping track of the
  ; multiplicand to get that number back (it'll be a value that's a power of
@@ -46,6 +47,7 @@ ln(%x,%prec) ; log base e
  ; First, set the precision and the limiting value.
  set %prec=$$prec^%tnflib($get(%prec))
  set %epsilon=$$epsilon^%tnflib(%prec)
+ write "got prec and epsilon",!
  ; step tells us which direction to push the power of ten:
  new step  set step=$select(%x<1:-1,1:1)
  ; m is the multiplicand, and since this is 10^p, and p always starts with
@@ -56,6 +58,7 @@ ln(%x,%prec) ; log base e
  ; Now, as long as stop isn't true, step up (or down) by powers of ten.
  ; x shrinks (or grows), while m grows (or shrinks). Then we recalculate stop
  ; depending on whether we've gotten close enough to 1.
+ write "stepping magnitude",!
  for p=0:step do  quit:stop
  . set %x=%x*$select(step<0:10,1:.1)
  . set m=m*$select(step<0:.1,1:10)
@@ -66,6 +69,7 @@ ln(%x,%prec) ; log base e
  ; At this point, we have scientific notation: x should be in [1,10), and m
  ; should be 10^p, so x*m should match the original argument. But if x>5, we
  ; can get that closer to 1 by dropping a power.
+ write "adjust for >5",!
  if %x>5 do
  . set %x=%x*.1
  . set m=m*10
@@ -91,10 +95,12 @@ ln(%x,%prec) ; log base e
  new yp   set yp=1
  new term
  ; Do terms two and up until we get to enough decimal places.
+ write "taylor series start (epsilon=",epsilon,")",!
  for p=2:2 do  quit:term<%epsilon
  . set yp=yp*y*y ; yp=y^p
  . set term=yp/(p+1)
  . set sum=term+sum
+ . write "p=",p,", yp=",yp,", term=",term,", sum=",sum,", e=",epsilon,!
  . quit
  ; Add back those powers of ten and return the value.
  set result=result*sum+logm
