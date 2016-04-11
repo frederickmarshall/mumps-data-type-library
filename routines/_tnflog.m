@@ -32,12 +32,13 @@ ln(%x,%prec) ; log base e
  ; So we won't bother unless x is positive.
  ; But we'll still set an error condition.
  set %x=$get(%x,0)
+ write !,"%x=",%x,", '>0?=",%x'>0,!
  if %x'>0 do
  . set %e="%tn-e-ln-lognpos"
  . set %e=%e_",Can't take a logarithm of a non-positive real number ("_%x_")"
  . quit
  quit:%e ""
- write !,"got past arg errors",!
+ write !,"got past arg errors %e=",%e,", %x=",%x,!
  ; First, this converges faster if the value is close to 1.
  ; So we'll normalize the number to scientific notation, keeping track of the
  ; multiplicand to get that number back (it'll be a value that's a power of
