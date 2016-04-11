@@ -32,7 +32,6 @@ ln(%x,%prec) ; log base e
  ; So we won't bother unless x is positive.
  ; But we'll still set an error condition.
  set %x=+$get(%x,0)
- write !,"%x=",%x,", '>0?=",%x'>0,!
  if +%x'>0 do
  . set %e="%tn-e-ln-lognpos"
  . set %e=%e_",Can't take a logarithm of a non-positive real number ("_%x_")"
